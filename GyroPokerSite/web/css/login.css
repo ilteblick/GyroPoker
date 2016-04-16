@@ -1,0 +1,31 @@
+form {
+    background: #0A0F33;
+    padding: 30px;
+}
+
+form button {
+    background: white;
+    color: #0C134A;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: serif;
+}
+
+form input,
+form button,
+form select{
+    color: darkblue;
+}
+
+.form-group label {
+    color: beige;
+    font-size: 16px;
+}
+
+.form-group {
+    height: 35px;
+}
+
+.panel {
+    margin-top: 40px;
+}

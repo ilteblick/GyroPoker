@@ -1,0 +1,26 @@
+* {
+    font-family: serif;
+    color: beige;
+}
+
+.container {
+    background: #0A0F33;
+    border: 1px solid #e2e2e2;
+    height: 100%;
+}
+
+.reference {
+    text-decoration: none;
+    color: #D4D3D3;
+    font-size: 18px;
+}
+
+.reference:hover {
+    color: white;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    width: 100%;
+}

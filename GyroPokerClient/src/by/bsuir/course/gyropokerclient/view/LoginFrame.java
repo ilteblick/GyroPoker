@@ -6,6 +6,9 @@
 package by.bsuir.course.gyropokerclient.view;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,6 +45,11 @@ public class LoginFrame extends javax.swing.JFrame {
         recoveryPassButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         loginLabel.setText("login:");
 
@@ -118,6 +126,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 .append(password);
         con.getSender().SendToServer(sb.toString());
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //con.getSender().SendToServer("Close");
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

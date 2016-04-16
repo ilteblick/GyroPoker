@@ -5,6 +5,9 @@
  */
 package by.bsuir.course.gyropokerclient.view;
 
+import by.bsuir.course.gyropokerclient.entity.Player;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Admin
@@ -14,8 +17,19 @@ public class CashierFrame extends javax.swing.JFrame {
     /**
      * Creates new form CashierFrame
      */
-    public CashierFrame() {
+    Player player;
+    
+    
+    
+    public CashierFrame(Player player){
+        
+        this.player = player;
         initComponents();
+        this.addresLabel.setText(player.address);
+        this.emailLabel.setText(player.email);
+        this.moneyLabel.setText(Double.toString(player.balance));
+        this.nicknameLabel.setText(player.nick);
+        this.nameLabel.setText(player.name + " " + player.surename);
     }
 
     /**
@@ -27,17 +41,110 @@ public class CashierFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nicknameLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        addresLabel = new javax.swing.JLabel();
+        cityLabel = new javax.swing.JLabel();
+        countryLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        moneyLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Personal information");
+
+        jLabel2.setText("Nickname");
+
+        nicknameLabel.setText("123");
+
+        jLabel4.setText("e-mail");
+
+        emailLabel.setText("123");
+
+        jLabel6.setText("Player Information");
+
+        nameLabel.setText("name");
+
+        addresLabel.setText("address");
+
+        cityLabel.setText("city");
+
+        countryLabel.setText("country");
+
+        jLabel3.setText("RealMoney");
+
+        jLabel5.setText("Available:");
+
+        moneyLabel.setText("456");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nicknameLabel)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(emailLabel)
+                            .addComponent(jLabel6)
+                            .addComponent(nameLabel)
+                            .addComponent(addresLabel)
+                            .addComponent(cityLabel)
+                            .addComponent(countryLabel))))
+                .addContainerGap(260, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moneyLabel)))
+                .addGap(75, 75, 75))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(moneyLabel))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nicknameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emailLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addresLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cityLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(countryLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -73,11 +180,24 @@ public class CashierFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CashierFrame().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addresLabel;
+    private javax.swing.JLabel cityLabel;
+    private javax.swing.JLabel countryLabel;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel moneyLabel;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel nicknameLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,16 +5,32 @@
  */
 package by.bsuir.course.gyropokerclient.view;
 
+import by.bsuir.course.gyropokerclient.connection.Connection;
+import by.bsuir.course.gyropokerclient.entity.Player;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Admin
  */
 public class LobbyFrame extends javax.swing.JFrame {
 
+    Player player;
+    
     /**
      * Creates new form LobbyFrame
+     * @param con
+     * @param nick
+     * @param surename
+     * @param name
+     * @param phone
+     * @param address
+     * @param email
+     * @param balance
+     * @param playMoney
      */
-    public LobbyFrame() {
+    public LobbyFrame(Connection con,Player player) {
+        this.player = player;
         initComponents();
     }
 
@@ -27,21 +43,71 @@ public class LobbyFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cashierBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tables = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cashierBtn.setLabel("Cashier");
+        cashierBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cashierBtnActionPerformed(evt);
+            }
+        });
+
+        tables.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Заголовок 1", "Заголовок 2", "Заголовок 3", "Заголовок 4"
+            }
+        ));
+        tables.setToolTipText("");
+        tables.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tables);
+        tables.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cashierBtn)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(cashierBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cashierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashierBtnActionPerformed
+        
+        CashierFrame cf = new CashierFrame(player);
+        cf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        cf.setVisible(true);
+        
+    }//GEN-LAST:event_cashierBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,11 +139,14 @@ public class LobbyFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LobbyFrame().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cashierBtn;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tables;
     // End of variables declaration//GEN-END:variables
 }

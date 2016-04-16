@@ -6,6 +6,7 @@
 package by.bsuir.course.gyropokerclient.logic;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
+import by.bsuir.course.gyropokerclient.entity.Packet;
 import java.io.IOException;
 
 /**
@@ -34,10 +35,24 @@ public class ConnectionHandler {
         con = new Connection();
     }
     
+    
+    public Connection getConnection(){
+        return con;
+    }
+    
     public void succcessConnection(){
         FramesHandler.getInstance().closeConnectionFrame();
         FramesHandler.getInstance().showLoginFrame(con);
     }
+    
+    public void succesLogin(Packet packet){
+        FramesHandler.getInstance().closeLoginFrame();
+        FramesHandler.getInstance().showLobbyFrame(
+                con,packet.getInfo()
+        );
+        
+    }
+    
     
     
 }

@@ -5,17 +5,25 @@
  */
 package by.bsuir.course.gyropokerclient.controllers;
 
+import by.bsuir.course.gyropokerclient.entity.Packet;
 import by.bsuir.course.gyropokerclient.logic.ConnectionHandler;
+import by.bsuir.course.gyropokerclient.logic.FramesHandler;
 
 /**
  *
  * @author Admin
  */
 public class MessageController {
-    public void execute(String msg){
-        switch(msg){
+    public void execute(Packet packet){
+        switch(packet.getHeader()){
             case "ServerRunning":{
                 ConnectionHandler.getInstance().succcessConnection();
+                break;
+            }
+            case "LoginResponse":{
+                if("Success".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().succesLogin(packet);
+                }
             }
         }
     }

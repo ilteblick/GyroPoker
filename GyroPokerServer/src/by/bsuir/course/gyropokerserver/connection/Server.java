@@ -5,6 +5,8 @@
  */
 package by.bsuir.course.gyropokerserver.connection;
 
+import by.bsuir.course.gyropokerserver.Entity.ConnectionList;
+import by.bsuir.course.gyropokerserver.logic.ConnectionHandler;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,7 +22,6 @@ import java.util.logging.Logger;
 public class Server extends Thread{
     private static int port = 1300;
     private ServerSocket serverSocket;
-    private List<Connection> connectionList = new ArrayList<>();
     
     public Server(){
         start();
@@ -33,10 +34,12 @@ public class Server extends Thread{
             System.out.println("Started!!!");
             while(true){
                 Socket socket = serverSocket.accept();
+                //ConnectionHandler.getInstance().newConnection(socket);
                 Connection con = new Connection(socket);
-                connectionList.add(con);
+                ConnectionList.getInstance().add(con);
+                //connectionList.add(con);
                 System.out.println("new");
-                con.send();
+                //con.sender.SendToClient("ServerRunning");
             }
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

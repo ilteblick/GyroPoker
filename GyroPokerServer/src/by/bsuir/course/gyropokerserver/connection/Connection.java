@@ -16,14 +16,12 @@ import java.net.Socket;
 public class Connection extends Thread{
     
     private Socket socket;
-    private DataOutputStream dos;
+    private Reciever reciever;
+    public Sender sender;
     
     public Connection(Socket socket) throws IOException{
         this.socket = socket;
-        dos = new DataOutputStream(socket.getOutputStream());
-    }
-    
-    public void send() throws IOException{
-        dos.writeUTF("ServerRunning");
+        this.sender = new Sender(socket);
+        this.reciever = new Reciever(socket,sender);
     }
 }

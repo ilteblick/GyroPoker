@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Connection extends Thread{
     private final int port = 1300;
     private String address = "127.0.0.1";
-    private Socket socket;
+    public Socket socket;
     private Sender sender;
     private Reciever reciever;
     

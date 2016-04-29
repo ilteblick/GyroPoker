@@ -41,6 +41,7 @@ public class Reciever extends Thread{
         }
         sender.SendToClient("ServerRunning");
         
+        
         try {
             String msg;
             

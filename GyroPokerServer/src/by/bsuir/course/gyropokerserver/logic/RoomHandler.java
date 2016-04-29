@@ -8,6 +8,7 @@ package by.bsuir.course.gyropokerserver.logic;
 import by.bsuir.course.gyropokerserver.DAO.GyroPokerDaoImpl;
 import by.bsuir.course.gyropokerserver.Entity.Packet;
 import by.bsuir.course.gyropokerserver.Entity.Player;
+import by.bsuir.course.gyropokerserver.Entity.TableList;
 
 /**
  *
@@ -30,7 +31,7 @@ public class RoomHandler {
             return ("LoginResponse:Success:" + player.nick + ":" + player.name +
                     ":" + player.surename + ":" + player.address + ":" + 
                     player.phone + ":" + player.email + ":" + Double.toString(player.balance) +
-                    ":" + Double.toString(player.playMoney));
+                    ":" + Double.toString(player.playMoney) + ":" + TableList.info());
         }else{
             return "LoginResponse:Failed";
         }

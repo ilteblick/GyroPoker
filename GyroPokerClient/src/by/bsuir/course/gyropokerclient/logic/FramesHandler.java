@@ -7,6 +7,7 @@ package by.bsuir.course.gyropokerclient.logic;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
 import by.bsuir.course.gyropokerclient.entity.Player;
+import by.bsuir.course.gyropokerclient.entity.Table;
 import by.bsuir.course.gyropokerclient.view.ConnectionFrame;
 import by.bsuir.course.gyropokerclient.view.LobbyFrame;
 import by.bsuir.course.gyropokerclient.view.LoginFrame;
@@ -61,10 +62,21 @@ public class FramesHandler {
         player.email = info.get(6);
         player.balance = Double.parseDouble(info.get(7));
         player.playMoney = Double.parseDouble(info.get(8));
+        
+        Table t1 = new Table(info.get(9), info.get(10), info.get(11));
+        Table t2 = new Table(info.get(12), info.get(13), info.get(14));
+        
+        ArrayList<Table> tables = new ArrayList<>();
+        tables.add(t1);
+        tables.add(t2);
         lobby = new LobbyFrame(
             con,
-            player
+            player,
+            tables
         );
+        
+        
+        
         lobby.show();
     }
     

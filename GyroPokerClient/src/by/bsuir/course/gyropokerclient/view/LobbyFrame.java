@@ -7,9 +7,11 @@ package by.bsuir.course.gyropokerclient.view;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
 import by.bsuir.course.gyropokerclient.entity.Player;
+import by.bsuir.course.gyropokerclient.entity.Table;
 import by.bsuir.course.gyropokerclient.entity.TableHeaders;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -19,6 +21,7 @@ import javax.swing.table.TableColumn;
 public class LobbyFrame extends javax.swing.JFrame {
 
     Player player;
+    ArrayList<Table> tablesList;
     
     /**
      * Creates new form LobbyFrame
@@ -32,8 +35,9 @@ public class LobbyFrame extends javax.swing.JFrame {
      * @param balance
      * @param playMoney
      */
-    public LobbyFrame(Connection con,Player player) {
+    public LobbyFrame(Connection con,Player player, ArrayList<Table> tables) {
         this.player = player;
+        this.tablesList = tables;
         initComponents();
         setTableNames();
     }
@@ -47,6 +51,10 @@ public class LobbyFrame extends javax.swing.JFrame {
         for(int i=0;i<this.tables.getColumnCount();i++){
             TableColumn column = this.tables.getTableHeader().getColumnModel().getColumn(i);
             column.setHeaderValue(header.get(i));
+        }
+        for(Table table: this.tablesList){
+            DefaultTableModel model = (DefaultTableModel)this.tables.getModel();
+            model.addRow(new Object[]{table.name,table.limits,table.players});
         }
     }
     
@@ -74,16 +82,7 @@ public class LobbyFrame extends javax.swing.JFrame {
 
         tables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Заголовок 1", "Заголовок 2", "Заголовок 3"

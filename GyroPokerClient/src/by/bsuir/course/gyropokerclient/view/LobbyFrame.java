@@ -7,7 +7,10 @@ package by.bsuir.course.gyropokerclient.view;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
 import by.bsuir.course.gyropokerclient.entity.Player;
+import by.bsuir.course.gyropokerclient.entity.TableHeaders;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -32,8 +35,21 @@ public class LobbyFrame extends javax.swing.JFrame {
     public LobbyFrame(Connection con,Player player) {
         this.player = player;
         initComponents();
+        setTableNames();
     }
 
+    
+    
+    
+    private void setTableNames(){
+        TableHeaders th = new TableHeaders();
+        ArrayList<String> header = th.getHeaders();
+        for(int i=0;i<this.tables.getColumnCount();i++){
+            TableColumn column = this.tables.getTableHeader().getColumnModel().getColumn(i);
+            column.setHeaderValue(header.get(i));
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,16 +74,19 @@ public class LobbyFrame extends javax.swing.JFrame {
 
         tables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Заголовок 1", "Заголовок 2", "Заголовок 3", "Заголовок 4"
+                "Заголовок 1", "Заголовок 2", "Заголовок 3"
             }
         ));
         tables.setToolTipText("");

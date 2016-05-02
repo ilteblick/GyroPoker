@@ -54,5 +54,9 @@ public class ConnectionHandler {
     }
     
     
+    public void tableInfo(Packet packet){
+        
+    }
+    
     
 }

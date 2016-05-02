@@ -22,6 +22,7 @@ public class LobbyFrame extends javax.swing.JFrame {
 
     Player player;
     ArrayList<Table> tablesList;
+    Connection con;
     
     /**
      * Creates new form LobbyFrame
@@ -36,6 +37,7 @@ public class LobbyFrame extends javax.swing.JFrame {
      * @param playMoney
      */
     public LobbyFrame(Connection con,Player player, ArrayList<Table> tables) {
+        this.con = con;
         this.player = player;
         this.tablesList = tables;
         initComponents();
@@ -90,6 +92,11 @@ public class LobbyFrame extends javax.swing.JFrame {
         ));
         tables.setToolTipText("");
         tables.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tables.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tables);
         tables.getAccessibleContext().setAccessibleName("");
 
@@ -126,6 +133,15 @@ public class LobbyFrame extends javax.swing.JFrame {
         cf.setVisible(true);
         
     }//GEN-LAST:event_cashierBtnActionPerformed
+
+    private void tablesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesMouseClicked
+        int row = this.tables.rowAtPoint(evt.getPoint());
+        String name = (String)this.tables.getModel().getValueAt(row, 0);
+        StringBuilder sb = new StringBuilder();
+        sb.append("TableInfo:")
+                .append(name);
+        con.getSender().SendToServer(sb.toString());
+    }//GEN-LAST:event_tablesMouseClicked
 
     /**
      * @param args the command line arguments

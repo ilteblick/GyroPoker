@@ -11,6 +11,7 @@ import by.bsuir.course.gyropokerclient.entity.Table;
 import by.bsuir.course.gyropokerclient.view.ConnectionFrame;
 import by.bsuir.course.gyropokerclient.view.LobbyFrame;
 import by.bsuir.course.gyropokerclient.view.LoginFrame;
+import by.bsuir.course.gyropokerclient.view.TableFrame;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,8 @@ public class FramesHandler {
     private LoginFrame lf;
     private LobbyFrame lobby;
     private static FramesHandler instance;
+    
+    private ArrayList<TableFrame> tables = new ArrayList<>();
     
     private FramesHandler(){
         
@@ -79,6 +82,11 @@ public class FramesHandler {
         
         lobby.show();
     }
+    
+    public void showTable(Connection con,ArrayList<String> info){
+        
+    }
+    
     
     public void closeLobbyFrame(){
         lobby.dispose();

@@ -23,4 +23,10 @@ public class Table {
         this.big = big;
         this.players = 0;
     }
+    
+    @Override
+    public String toString(){
+        return(this.name + ":" + Integer.toString(small) + "/" + Integer.toString(big) 
+                 );
+    }
 }

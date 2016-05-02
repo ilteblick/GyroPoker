@@ -7,6 +7,7 @@ package by.bsuir.course.gyropokerserver.controllers;
 
 import by.bsuir.course.gyropokerserver.Entity.Packet;
 import by.bsuir.course.gyropokerserver.logic.RoomHandler;
+import by.bsuir.course.gyropokerserver.logic.TableHandler;
 
 /**
  *
@@ -14,12 +15,16 @@ import by.bsuir.course.gyropokerserver.logic.RoomHandler;
  */
 public class MessageController {
     RoomHandler rh = new RoomHandler();
+    TableHandler th = new TableHandler();
     
     public String execute(Packet packet){
         switch(packet.getHeader()){
             case "Login":{
                 return rh.checkLoginInfo(packet);
                 
+            }
+            case "TableInfo":{
+                return th.getTableInfo(packet.getInfo().get(0));
             }
             default:return"";
         }

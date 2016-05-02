@@ -25,6 +25,11 @@ public class MessageController {
                     ConnectionHandler.getInstance().succesLogin(packet);
                 }
             }
+            case "TableInfo":{
+                if("Success".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().tableInfo(packet);
+                }
+            }
         }
     }
 }

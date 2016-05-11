@@ -24,11 +24,14 @@ public class MessageController {
                 if("Success".equals(packet.getInfo().get(0))){
                     ConnectionHandler.getInstance().succesLogin(packet);
                 }
+                break;
             }
+            
             case "TableInfo":{
-                if("Success".equals(packet.getInfo().get(0))){
+                if("success".equals(packet.getInfo().get(0))){
                     ConnectionHandler.getInstance().tableInfo(packet);
                 }
+                break;
             }
         }
     }

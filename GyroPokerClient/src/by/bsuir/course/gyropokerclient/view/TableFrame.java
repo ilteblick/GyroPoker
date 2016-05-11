@@ -5,6 +5,9 @@
  */
 package by.bsuir.course.gyropokerclient.view;
 
+import by.bsuir.course.gyropokerclient.connection.Connection;
+import java.util.ArrayList;
+
 /**
  *
  * @author Admin
@@ -14,13 +17,14 @@ public class TableFrame extends javax.swing.JFrame {
     private String name;
     private int sb;
     private int bb;
+    private String blinds;
     /**
      * Creates new form TableFrame
      */
-    public TableFrame(String name, int sb, int bb) {
-        this.name = name;
-        this.sb = sb;
-        this.bb = bb;
+    public TableFrame(Connection con, ArrayList<String> info) {
+        this.name = info.get(1);
+        this.blinds = info.get(2);
+        this.setTitle(name + " " + blinds);
         initComponents();
     }
 

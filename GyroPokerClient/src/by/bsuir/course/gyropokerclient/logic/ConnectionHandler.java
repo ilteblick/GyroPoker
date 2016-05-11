@@ -55,7 +55,7 @@ public class ConnectionHandler {
     
     
     public void tableInfo(Packet packet){
-        
+        FramesHandler.getInstance().showTable(con, packet.getInfo());
     }
     
     

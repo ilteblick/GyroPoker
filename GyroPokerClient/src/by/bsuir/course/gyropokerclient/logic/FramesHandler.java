@@ -13,6 +13,7 @@ import by.bsuir.course.gyropokerclient.view.LobbyFrame;
 import by.bsuir.course.gyropokerclient.view.LoginFrame;
 import by.bsuir.course.gyropokerclient.view.TableFrame;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,7 +25,7 @@ public class FramesHandler {
     private LobbyFrame lobby;
     private static FramesHandler instance;
     
-    private ArrayList<TableFrame> tables = new ArrayList<>();
+    private ArrayList<TableFrame> tables = new ArrayList<>(2);
     
     private FramesHandler(){
         
@@ -69,13 +70,13 @@ public class FramesHandler {
         Table t1 = new Table(info.get(9), info.get(10), info.get(11));
         Table t2 = new Table(info.get(12), info.get(13), info.get(14));
         
-        ArrayList<Table> tables = new ArrayList<>();
-        tables.add(t1);
-        tables.add(t2);
+        ArrayList<Table> tablesA = new ArrayList<>();
+        tablesA.add(t1);
+        tablesA.add(t2);
         lobby = new LobbyFrame(
             con,
             player,
-            tables
+            tablesA
         );
         
         
@@ -84,7 +85,10 @@ public class FramesHandler {
     }
     
     public void showTable(Connection con,ArrayList<String> info){
-        
+        TableFrame tf = new TableFrame(con,info);
+        this.tables.add(tf);
+        tf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        tf.show();
     }
     
     

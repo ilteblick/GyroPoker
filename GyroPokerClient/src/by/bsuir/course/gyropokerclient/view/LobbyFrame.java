@@ -9,6 +9,7 @@ import by.bsuir.course.gyropokerclient.connection.Connection;
 import by.bsuir.course.gyropokerclient.entity.Player;
 import by.bsuir.course.gyropokerclient.entity.Table;
 import by.bsuir.course.gyropokerclient.entity.TableHeaders;
+import by.bsuir.course.gyropokerclient.logic.FramesHandler;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +24,10 @@ public class LobbyFrame extends javax.swing.JFrame {
     Player player;
     ArrayList<Table> tablesList;
     Connection con;
-    
+
     /**
      * Creates new form LobbyFrame
+     *
      * @param con
      * @param nick
      * @param surename
@@ -36,7 +38,7 @@ public class LobbyFrame extends javax.swing.JFrame {
      * @param balance
      * @param playMoney
      */
-    public LobbyFrame(Connection con,Player player, ArrayList<Table> tables) {
+    public LobbyFrame(Connection con, Player player, ArrayList<Table> tables) {
         this.con = con;
         this.player = player;
         this.tablesList = tables;
@@ -44,22 +46,19 @@ public class LobbyFrame extends javax.swing.JFrame {
         setTableNames();
     }
 
-    
-    
-    
-    private void setTableNames(){
+    private void setTableNames() {
         TableHeaders th = new TableHeaders();
         ArrayList<String> header = th.getHeaders();
-        for(int i=0;i<this.tables.getColumnCount();i++){
+        for (int i = 0; i < this.tables.getColumnCount(); i++) {
             TableColumn column = this.tables.getTableHeader().getColumnModel().getColumn(i);
             column.setHeaderValue(header.get(i));
         }
-        for(Table table: this.tablesList){
-            DefaultTableModel model = (DefaultTableModel)this.tables.getModel();
-            model.addRow(new Object[]{table.name,table.limits,table.players});
+        for (Table table : this.tablesList) {
+            DefaultTableModel model = (DefaultTableModel) this.tables.getModel();
+            model.addRow(new Object[]{table.name, table.limits, table.players});
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,20 +126,30 @@ public class LobbyFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cashierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashierBtnActionPerformed
-        
+
         CashierFrame cf = new CashierFrame(player);
         cf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         cf.setVisible(true);
-        
+
     }//GEN-LAST:event_cashierBtnActionPerformed
 
     private void tablesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesMouseClicked
         int row = this.tables.rowAtPoint(evt.getPoint());
-        String name = (String)this.tables.getModel().getValueAt(row, 0);
-        StringBuilder sb = new StringBuilder();
-        sb.append("TableInfo:")
-                .append(name);
-        con.getSender().SendToServer(sb.toString());
+        String name = (String) this.tables.getModel().getValueAt(row, 0);
+        boolean flag = false;
+        for (TableFrame table : FramesHandler.getInstance().tables) {
+            if (table.getTableName().equals(name)) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("TableInfo:")
+                    .append(name);
+            con.getSender().SendToServer(sb.toString());
+        }
+
     }//GEN-LAST:event_tablesMouseClicked
 
     /**
@@ -173,7 +182,7 @@ public class LobbyFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }

@@ -26,7 +26,7 @@ public class FramesHandler {
     private static FramesHandler instance;
     private String nick;
     
-    private ArrayList<TableFrame> tables = new ArrayList<>(2);
+    public ArrayList<TableFrame> tables = new ArrayList<>(2);
     
     private FramesHandler(){
         

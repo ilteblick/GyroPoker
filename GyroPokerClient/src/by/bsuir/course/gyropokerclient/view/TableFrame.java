@@ -50,6 +50,20 @@ public class TableFrame extends javax.swing.JFrame {
         }
     }
     
+    private void seatHandler(Integer place){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Seat")
+                .append(":")
+                .append(this.name)
+                .append(":")
+                .append(this.nick)
+                .append(":")
+                .append(Integer.toString(place))
+                .append(":")
+                .append("100");                
+        this.con.getSender().SendToServer(sb.toString());
+    }
+    
     
     public void InitPlayers(ArrayList<String> info){
         this.initPlayer(info.get(3), info.get(4), info.get(5), Player1Nick, Player1Cash, Player1Bets, Player1Seat);
@@ -305,37 +319,27 @@ public class TableFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Player1SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player1SeatActionPerformed
-        StringBuilder sb = new StringBuilder();
-        sb.append("Seat")
-                .append(":")
-                .append(this.name)
-                .append(":")
-                .append(this.nick)
-                .append(":")
-                .append("1")
-                .append(":")
-                .append("100");                
-        this.con.getSender().SendToServer(sb.toString());
+        this.seatHandler(1);
     }//GEN-LAST:event_Player1SeatActionPerformed
 
     private void Player2SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player2SeatActionPerformed
-        // TODO add your handling code here:
+        this.seatHandler(2);
     }//GEN-LAST:event_Player2SeatActionPerformed
 
     private void Player3SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player3SeatActionPerformed
-        // TODO add your handling code here:
+        this.seatHandler(3);
     }//GEN-LAST:event_Player3SeatActionPerformed
 
     private void Player4SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player4SeatActionPerformed
-        // TODO add your handling code here:
+        this.seatHandler(4);
     }//GEN-LAST:event_Player4SeatActionPerformed
 
     private void Player5SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player5SeatActionPerformed
-        // TODO add your handling code here:
+        this.seatHandler(5);
     }//GEN-LAST:event_Player5SeatActionPerformed
 
     private void Player6SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player6SeatActionPerformed
-        // TODO add your handling code here:
+        this.seatHandler(6);
     }//GEN-LAST:event_Player6SeatActionPerformed
 
     /**

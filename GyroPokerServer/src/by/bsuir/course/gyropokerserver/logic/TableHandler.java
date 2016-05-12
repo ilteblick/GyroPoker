@@ -31,4 +31,14 @@ public class TableHandler {
         }
         return "";
     }
+    
+    public String standUP(String name, Integer place){
+        for(Table table: TableList.tables){
+            if(table.name.equals(name)){
+                table.standUp(place);
+                return("Change:success:"+table.toString()); 
+            }
+        }
+        return "";
+    }
 }

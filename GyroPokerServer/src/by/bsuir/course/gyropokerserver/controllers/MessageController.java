@@ -33,6 +33,10 @@ public class MessageController {
                         Integer.parseInt(packet.getInfo().get(2)),
                         Integer.parseInt(packet.getInfo().get(3)));
             }
+            case "StandUP":{
+                return th.standUP(packet.getInfo().get(0),
+                        Integer.parseInt(packet.getInfo().get(1)));
+            }
             default:return"";
         }
     }

@@ -102,8 +102,7 @@ public class FramesHandler {
     public void redrawTable(ArrayList<String> info){
         for(TableFrame table : this.tables){
             if(table.getTableName().equals(info.get(1))){
-                //redraw
-                table.InitPlayers(info);
+                table.drawTable(info);
             }
         }
     }

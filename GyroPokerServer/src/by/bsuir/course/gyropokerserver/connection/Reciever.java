@@ -55,7 +55,7 @@ public class Reciever extends Thread{
                         PacketCreator creator = new PacketCreator();
                         Packet packet = creator.createPacket(msg);
                         String response = msgCtrl.execute(packet);
-                        sender.SendToClient(response);
+                        sender.SendToClient(response);//add broadcast
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(Reciever.class.getName()).log(Level.SEVERE, null, ex);

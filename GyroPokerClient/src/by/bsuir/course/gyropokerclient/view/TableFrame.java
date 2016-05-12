@@ -6,6 +6,7 @@
 package by.bsuir.course.gyropokerclient.view;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
+import by.bsuir.course.gyropokerclient.logic.FramesHandler;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,42 +18,58 @@ import javax.swing.JLabel;
 public class TableFrame extends javax.swing.JFrame {
 
     private String name;
-    
-   
-    public String getTableName(){
+    private Integer place = 0;
+
+    public String getTableName() {
         return this.name;
     }
-    
+
     private int sb;
     private int bb;
     private String blinds;
     private String nick;
     private Connection con;
+
     /**
      * Creates new form TableFrame
+     *
+     * @param con
+     * @param info
+     * @param nick
      */
     public TableFrame(Connection con, ArrayList<String> info, String nick) {
         this.con = con;
         this.nick = nick;
         this.name = info.get(1);
         this.blinds = info.get(2);
-        this.setTitle(name + " " + blinds + "logged as "+ nick);      
+        this.setTitle(name + " " + blinds + "logged as " + nick);
         initComponents();
-        this.InitPlayers(info);
+        this.initPlayers(info);
+        this.standUpBtn.setVisible(false);
     }
 
-    public void initPlayer(String nick, String cash, String bets, JLabel nickL,
-            JLabel cashL, JLabel betsL, JButton seat){
-        if(!nick.equals("0")){
+    private void initPlayer(String nick, String cash, String bets, JLabel nickL,
+            JLabel cashL, JLabel betsL, JButton seat) {
+        if (!nick.equals("0")) {
+            seat.setVisible(false);
+            nickL.setVisible(true);
+            betsL.setVisible(true);
+            cashL.setVisible(true);
             nickL.setText(nick);
             betsL.setText(bets);
             cashL.setText(cash);
+        } else {
+            seat.setVisible(true);
+            nickL.setVisible(false);
+            betsL.setVisible(false);
+            cashL.setVisible(false);
         }
     }
-    
-    private void seatHandler(Integer place){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Seat")
+
+    private void seatHandler(Integer place) {
+        StringBuilder stringBuilder = new StringBuilder();
+        this.place = place;
+        stringBuilder.append("Seat")
                 .append(":")
                 .append(this.name)
                 .append(":")
@@ -60,12 +77,20 @@ public class TableFrame extends javax.swing.JFrame {
                 .append(":")
                 .append(Integer.toString(place))
                 .append(":")
-                .append("100");                
-        this.con.getSender().SendToServer(sb.toString());
+                .append("100");
+        this.con.getSender().SendToServer(stringBuilder.toString());
     }
-    
-    
-    public void InitPlayers(ArrayList<String> info){
+
+    public void drawTable(ArrayList<String> info) {
+        if (this.place == 0) {
+            this.standUpBtn.setVisible(false);
+        } else {
+            this.standUpBtn.setVisible(true);
+        }
+        this.initPlayers(info);
+    }
+
+    private void initPlayers(ArrayList<String> info) {
         this.initPlayer(info.get(3), info.get(4), info.get(5), Player1Nick, Player1Cash, Player1Bets, Player1Seat);
         this.initPlayer(info.get(7), info.get(8), info.get(9), Player2Nick, Player2Cash, Player2Bets, Player2Seat);
         this.initPlayer(info.get(11), info.get(12), info.get(13), Player3Nick, Player3Cash, Player3Bets, Player3Seat);
@@ -73,6 +98,7 @@ public class TableFrame extends javax.swing.JFrame {
         this.initPlayer(info.get(19), info.get(20), info.get(21), Player5Nick, Player5Cash, Player5Bets, Player5Seat);
         this.initPlayer(info.get(23), info.get(24), info.get(25), Player6Nick, Player6Cash, Player6Bets, Player6Seat);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,8 +132,14 @@ public class TableFrame extends javax.swing.JFrame {
         Player6Nick = new javax.swing.JLabel();
         Player6Cash = new javax.swing.JLabel();
         Player6Seat = new javax.swing.JButton();
+        standUpBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         Player1Nick.setText("jLabel1");
 
@@ -187,6 +219,13 @@ public class TableFrame extends javax.swing.JFrame {
             }
         });
 
+        standUpBtn.setText("StandUp");
+        standUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standUpBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -229,23 +268,26 @@ public class TableFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(177, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(standUpBtn)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Player4Cash)
-                                    .addComponent(Player4Nick)
-                                    .addComponent(Player4Bets)))
-                            .addComponent(Player4Seat))
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Player4Cash)
+                                            .addComponent(Player4Nick)
+                                            .addComponent(Player4Bets)))
+                                    .addComponent(Player4Seat))
+                                .addGap(137, 137, 137)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Player3Cash)
-                                    .addComponent(Player3Nick)
-                                    .addComponent(Player3Bets)))
-                            .addComponent(Player3Seat))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Player3Cash)
+                                            .addComponent(Player3Nick)
+                                            .addComponent(Player3Bets)))
+                                    .addComponent(Player3Seat))))
                         .addGap(106, 106, 106)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -261,8 +303,10 @@ public class TableFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(Player1Nick)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Player1Nick)
+                            .addComponent(standUpBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Player1Cash)
@@ -342,6 +386,38 @@ public class TableFrame extends javax.swing.JFrame {
         this.seatHandler(6);
     }//GEN-LAST:event_Player6SeatActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (place != 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("StandUP")
+                    .append(":")
+                    .append(this.name)
+                    .append(":")
+                    .append(Integer.toString(this.place));
+            place = 0;
+            con.getSender().SendToServer(stringBuilder.toString());
+        }
+        for (TableFrame table : FramesHandler.getInstance().tables) {
+            if (table.name.equals(this.name)) {
+                FramesHandler.getInstance().tables.remove(table);
+                break;
+            }
+        }
+
+
+    }//GEN-LAST:event_formWindowClosing
+
+    private void standUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standUpBtnActionPerformed
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("StandUP")
+                .append(":")
+                .append(this.name)
+                .append(":")
+                .append(Integer.toString(this.place));
+        place = 0;
+        con.getSender().SendToServer(stringBuilder.toString());
+    }//GEN-LAST:event_standUpBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,10 +446,7 @@ public class TableFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
         });
     }
 
@@ -402,5 +475,6 @@ public class TableFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Player6Cash;
     private javax.swing.JLabel Player6Nick;
     private javax.swing.JButton Player6Seat;
+    private javax.swing.JButton standUpBtn;
     // End of variables declaration//GEN-END:variables
 }

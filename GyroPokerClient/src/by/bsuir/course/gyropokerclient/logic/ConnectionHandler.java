@@ -58,5 +58,9 @@ public class ConnectionHandler {
         FramesHandler.getInstance().showTable(con, packet.getInfo());
     }
     
+    public void makeChanges(Packet packet){
+        FramesHandler.getInstance().redrawTable(packet.getInfo());
+    }
+    
     
 }

@@ -33,6 +33,12 @@ public class MessageController {
                 }
                 break;
             }
+            case "Change":{
+                if("success".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().makeChanges(packet);
+                }
+                break;
+            }
         }
     }
 }

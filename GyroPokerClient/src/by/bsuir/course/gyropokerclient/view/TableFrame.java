@@ -7,6 +7,8 @@ package by.bsuir.course.gyropokerclient.view;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -15,19 +17,48 @@ import java.util.ArrayList;
 public class TableFrame extends javax.swing.JFrame {
 
     private String name;
+    
+   
+    public String getTableName(){
+        return this.name;
+    }
+    
     private int sb;
     private int bb;
     private String blinds;
+    private String nick;
+    private Connection con;
     /**
      * Creates new form TableFrame
      */
-    public TableFrame(Connection con, ArrayList<String> info) {
+    public TableFrame(Connection con, ArrayList<String> info, String nick) {
+        this.con = con;
+        this.nick = nick;
         this.name = info.get(1);
         this.blinds = info.get(2);
-        this.setTitle(name + " " + blinds);
+        this.setTitle(name + " " + blinds + "logged as "+ nick);      
         initComponents();
+        this.InitPlayers(info);
     }
 
+    public void initPlayer(String nick, String cash, String bets, JLabel nickL,
+            JLabel cashL, JLabel betsL, JButton seat){
+        if(!nick.equals("0")){
+            nickL.setText(nick);
+            betsL.setText(bets);
+            cashL.setText(cash);
+        }
+    }
+    
+    
+    public void InitPlayers(ArrayList<String> info){
+        this.initPlayer(info.get(3), info.get(4), info.get(5), Player1Nick, Player1Cash, Player1Bets, Player1Seat);
+        this.initPlayer(info.get(7), info.get(8), info.get(9), Player2Nick, Player2Cash, Player2Bets, Player2Seat);
+        this.initPlayer(info.get(11), info.get(12), info.get(13), Player3Nick, Player3Cash, Player3Bets, Player3Seat);
+        this.initPlayer(info.get(15), info.get(16), info.get(17), Player4Nick, Player4Cash, Player4Bets, Player4Seat);
+        this.initPlayer(info.get(19), info.get(20), info.get(21), Player5Nick, Player5Cash, Player5Bets, Player5Seat);
+        this.initPlayer(info.get(23), info.get(24), info.get(25), Player6Nick, Player6Cash, Player6Bets, Player6Seat);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +71,27 @@ public class TableFrame extends javax.swing.JFrame {
         Player1Nick = new javax.swing.JLabel();
         Player1Cash = new javax.swing.JLabel();
         Player1Seat = new javax.swing.JButton();
+        Player1Bets = new javax.swing.JLabel();
+        Player2Bets = new javax.swing.JLabel();
+        Player2Nick = new javax.swing.JLabel();
+        Player2Cash = new javax.swing.JLabel();
+        Player2Seat = new javax.swing.JButton();
+        Player3Bets = new javax.swing.JLabel();
+        Player3Nick = new javax.swing.JLabel();
+        Player3Cash = new javax.swing.JLabel();
+        Player3Seat = new javax.swing.JButton();
+        Player4Bets = new javax.swing.JLabel();
+        Player4Nick = new javax.swing.JLabel();
+        Player4Cash = new javax.swing.JLabel();
+        Player4Seat = new javax.swing.JButton();
+        Player5Bets = new javax.swing.JLabel();
+        Player5Nick = new javax.swing.JLabel();
+        Player5Cash = new javax.swing.JLabel();
+        Player5Seat = new javax.swing.JButton();
+        Player6Bets = new javax.swing.JLabel();
+        Player6Nick = new javax.swing.JLabel();
+        Player6Cash = new javax.swing.JLabel();
+        Player6Seat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,37 +100,243 @@ public class TableFrame extends javax.swing.JFrame {
         Player1Cash.setText("jLabel2");
 
         Player1Seat.setText("Seat");
+        Player1Seat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Player1SeatActionPerformed(evt);
+            }
+        });
+
+        Player1Bets.setText("jLabel1");
+
+        Player2Bets.setText("jLabel1");
+
+        Player2Nick.setText("jLabel1");
+
+        Player2Cash.setText("jLabel2");
+
+        Player2Seat.setText("Seat");
+        Player2Seat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Player2SeatActionPerformed(evt);
+            }
+        });
+
+        Player3Bets.setText("jLabel1");
+
+        Player3Nick.setText("jLabel1");
+
+        Player3Cash.setText("jLabel2");
+
+        Player3Seat.setText("Seat");
+        Player3Seat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Player3SeatActionPerformed(evt);
+            }
+        });
+
+        Player4Bets.setText("jLabel1");
+
+        Player4Nick.setText("jLabel1");
+
+        Player4Cash.setText("jLabel2");
+
+        Player4Seat.setText("Seat");
+        Player4Seat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Player4SeatActionPerformed(evt);
+            }
+        });
+
+        Player5Bets.setText("jLabel1");
+
+        Player5Nick.setText("jLabel1");
+
+        Player5Cash.setText("jLabel2");
+
+        Player5Seat.setText("Seat");
+        Player5Seat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Player5SeatActionPerformed(evt);
+            }
+        });
+
+        Player6Bets.setText("jLabel1");
+
+        Player6Nick.setText("jLabel1");
+
+        Player6Cash.setText("jLabel2");
+
+        Player6Seat.setText("Seat");
+        Player6Seat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Player6SeatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Player6Cash)
+                            .addComponent(Player6Nick)
+                            .addComponent(Player6Bets)))
+                    .addComponent(Player6Seat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Player1Bets)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Player1Cash)
                             .addComponent(Player1Nick)))
+                    .addComponent(Player1Seat))
+                .addGap(47, 47, 47))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addComponent(Player1Seat)))
-                .addContainerGap(316, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Player5Cash)
+                                    .addComponent(Player5Nick)
+                                    .addComponent(Player5Bets)))
+                            .addComponent(Player5Seat))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Player2Bets)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(177, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Player4Cash)
+                                    .addComponent(Player4Nick)
+                                    .addComponent(Player4Bets)))
+                            .addComponent(Player4Seat))
+                        .addGap(137, 137, 137)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Player3Cash)
+                                    .addComponent(Player3Nick)
+                                    .addComponent(Player3Bets)))
+                            .addComponent(Player3Seat))
+                        .addGap(106, 106, 106)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Player2Cash)
+                            .addComponent(Player2Nick)))
+                    .addComponent(Player2Seat))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(247, Short.MAX_VALUE)
-                .addComponent(Player1Nick)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Player1Cash)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Player1Seat)
-                .addGap(38, 38, 38))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(Player1Nick)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Player1Cash)
+                            .addComponent(Player1Bets))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player1Seat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Player2Nick)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Player2Cash)
+                            .addComponent(Player2Bets))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player2Seat)
+                        .addGap(80, 80, 80))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Player6Bets)
+                        .addGap(17, 17, 17)
+                        .addComponent(Player6Nick)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player6Cash)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player6Seat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(Player5Bets)
+                        .addGap(17, 17, 17)
+                        .addComponent(Player5Nick)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player5Cash)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player5Seat)
+                        .addGap(15, 15, 15)
+                        .addComponent(Player4Bets)
+                        .addGap(17, 17, 17)
+                        .addComponent(Player4Nick)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player4Cash)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player4Seat))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Player3Bets)
+                        .addGap(17, 17, 17)
+                        .addComponent(Player3Nick)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player3Cash)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Player3Seat)))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Player1SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player1SeatActionPerformed
+        StringBuilder sb = new StringBuilder();
+        sb.append("Seat")
+                .append(":")
+                .append(this.name)
+                .append(":")
+                .append(this.nick)
+                .append(":")
+                .append("1")
+                .append(":")
+                .append("100");                
+        this.con.getSender().SendToServer(sb.toString());
+    }//GEN-LAST:event_Player1SeatActionPerformed
+
+    private void Player2SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player2SeatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Player2SeatActionPerformed
+
+    private void Player3SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player3SeatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Player3SeatActionPerformed
+
+    private void Player4SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player4SeatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Player4SeatActionPerformed
+
+    private void Player5SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player5SeatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Player5SeatActionPerformed
+
+    private void Player6SeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player6SeatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Player6SeatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,8 +374,29 @@ public class TableFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Player1Bets;
     private javax.swing.JLabel Player1Cash;
     private javax.swing.JLabel Player1Nick;
     private javax.swing.JButton Player1Seat;
+    private javax.swing.JLabel Player2Bets;
+    private javax.swing.JLabel Player2Cash;
+    private javax.swing.JLabel Player2Nick;
+    private javax.swing.JButton Player2Seat;
+    private javax.swing.JLabel Player3Bets;
+    private javax.swing.JLabel Player3Cash;
+    private javax.swing.JLabel Player3Nick;
+    private javax.swing.JButton Player3Seat;
+    private javax.swing.JLabel Player4Bets;
+    private javax.swing.JLabel Player4Cash;
+    private javax.swing.JLabel Player4Nick;
+    private javax.swing.JButton Player4Seat;
+    private javax.swing.JLabel Player5Bets;
+    private javax.swing.JLabel Player5Cash;
+    private javax.swing.JLabel Player5Nick;
+    private javax.swing.JButton Player5Seat;
+    private javax.swing.JLabel Player6Bets;
+    private javax.swing.JLabel Player6Cash;
+    private javax.swing.JLabel Player6Nick;
+    private javax.swing.JButton Player6Seat;
     // End of variables declaration//GEN-END:variables
 }

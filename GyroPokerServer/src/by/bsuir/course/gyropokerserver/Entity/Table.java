@@ -39,6 +39,14 @@ public class Table {
         }
     }
     
+    public void Seat(String nick, int place, Integer amouth){
+        seats.remove(place-1);
+        seats.add(place-1, nick);
+        cash.remove(place-1);
+        cash.add(place-1, amouth);
+        System.out.println("by.bsuir.course.gyropokerserver.Entity.Table.Seat()");
+    }
+    
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -50,6 +58,7 @@ public class Table {
                 .append(":");
         for(int i=0;i<6;i++){
             sb.append(seats.get(i))
+                    .append(":")
                     .append(Integer.toString(cash.get(i)))
                     .append(":")
                     .append(Integer.toString(bets.get(i)))

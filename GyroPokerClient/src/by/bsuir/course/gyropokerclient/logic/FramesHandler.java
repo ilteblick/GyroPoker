@@ -24,6 +24,7 @@ public class FramesHandler {
     private LoginFrame lf;
     private LobbyFrame lobby;
     private static FramesHandler instance;
+    private String nick;
     
     private ArrayList<TableFrame> tables = new ArrayList<>(2);
     
@@ -59,6 +60,7 @@ public class FramesHandler {
     public void showLobbyFrame(Connection con, ArrayList<String> info){
         Player player = new Player();
         player.nick = info.get(1);
+        this.nick = info.get(1);
         player.name = info.get(2);
         player.surename = info.get(3);
         player.address = info.get(4);
@@ -85,7 +87,7 @@ public class FramesHandler {
     }
     
     public void showTable(Connection con,ArrayList<String> info){
-        TableFrame tf = new TableFrame(con,info);
+        TableFrame tf = new TableFrame(con,info,nick);
         this.tables.add(tf);
         tf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         tf.show();
@@ -94,6 +96,16 @@ public class FramesHandler {
     
     public void closeLobbyFrame(){
         lobby.dispose();
+    }
+    
+    
+    public void redrawTable(ArrayList<String> info){
+        for(TableFrame table : this.tables){
+            if(table.getTableName().equals(info.get(1))){
+                //redraw
+                table.InitPlayers(info);
+            }
+        }
     }
     
     

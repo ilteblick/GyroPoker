@@ -26,6 +26,13 @@ public class MessageController {
             case "TableInfo":{
                 return th.getTableInfo(packet.getInfo().get(0));
             }
+            
+            case "Seat":{
+                return th.seatToTable(packet.getInfo().get(0),
+                        packet.getInfo().get(1),
+                        Integer.parseInt(packet.getInfo().get(2)),
+                        Integer.parseInt(packet.getInfo().get(3)));
+            }
             default:return"";
         }
     }

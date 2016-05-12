@@ -21,4 +21,14 @@ public class TableHandler {
         }
         return "";
     }
+    
+    public String seatToTable(String name, String nick, Integer place, Integer amount ){
+        for(Table table: TableList.tables){
+            if(table.name.equals(name)){
+                table.Seat(nick, place, amount);
+                return("Change:success:"+table.toString()); 
+            }
+        }
+        return "";
+    }
 }

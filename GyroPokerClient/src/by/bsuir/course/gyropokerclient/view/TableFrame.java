@@ -50,6 +50,7 @@ public class TableFrame extends javax.swing.JFrame {
 
     private void initPlayer(String nick, String cash, String bets, JLabel nickL,
             JLabel cashL, JLabel betsL, JButton seat) {
+
         if (!nick.equals("0")) {
             seat.setVisible(false);
             nickL.setVisible(true);
@@ -59,11 +60,16 @@ public class TableFrame extends javax.swing.JFrame {
             betsL.setText(bets);
             cashL.setText(cash);
         } else {
-            seat.setVisible(true);
+            if (this.place == 0) {
+                seat.setVisible(true);
+            }else{
+                seat.setVisible(false);
+            }
             nickL.setVisible(false);
             betsL.setVisible(false);
             cashL.setVisible(false);
         }
+
     }
 
     private void seatHandler(Integer place) {
@@ -84,10 +90,12 @@ public class TableFrame extends javax.swing.JFrame {
     public void drawTable(ArrayList<String> info) {
         if (this.place == 0) {
             this.standUpBtn.setVisible(false);
+            this.hideBtns();
         } else {
             this.standUpBtn.setVisible(true);
         }
         this.initPlayers(info);
+
     }
 
     private void initPlayers(ArrayList<String> info) {
@@ -97,6 +105,15 @@ public class TableFrame extends javax.swing.JFrame {
         this.initPlayer(info.get(15), info.get(16), info.get(17), Player4Nick, Player4Cash, Player4Bets, Player4Seat);
         this.initPlayer(info.get(19), info.get(20), info.get(21), Player5Nick, Player5Cash, Player5Bets, Player5Seat);
         this.initPlayer(info.get(23), info.get(24), info.get(25), Player6Nick, Player6Cash, Player6Bets, Player6Seat);
+    }
+
+    private void hideBtns() {
+        this.Player1Seat.setVisible(false);
+        this.Player2Seat.setVisible(false);
+        this.Player3Seat.setVisible(false);
+        this.Player4Seat.setVisible(false);
+        this.Player5Seat.setVisible(false);
+        this.Player6Seat.setVisible(false);
     }
 
     /**

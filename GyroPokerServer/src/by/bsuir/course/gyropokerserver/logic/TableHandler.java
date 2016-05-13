@@ -26,6 +26,33 @@ public class TableHandler {
         return null;
     }
 
+    public ArrayList<String> fold(String name, Integer place){
+        ArrayList<String> list = new ArrayList<>();
+        for (Table table : TableList.tables) {
+            if (table.name.equals(name)) {
+                table.fold(place);
+                boolean end = table.checkEndGame();
+                if(end){
+                    table.endGame();
+                    list.add("Change:success:" + table.toString());
+                    list.add("Change:newGame:"+ table.name +":" + table.startNewGame());
+                    table.betBlinds();
+                    list.add("Change:success:" + table.toString());
+                }else{
+                    boolean result = table.nextTurn();
+                    if(result){
+                        
+                    }else{
+                        list.add("Change:success:" + table.toString());
+                    }
+                }
+                return list;
+            }
+        }
+        return null;
+    }
+    
+    
     public ArrayList<String> seatToTable(String name, String nick, Integer place, Integer amount) {
         ArrayList<String> list = new ArrayList<>();
         for (Table table : TableList.tables) {

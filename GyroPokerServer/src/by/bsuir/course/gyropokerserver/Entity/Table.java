@@ -19,8 +19,8 @@ public class Table implements TableActions {
 
     private int buttonPosition = 0;
     private int turn = 0;
-    
-    
+    private int actionPosition;
+
     public String name;//table name
     public int small;// SB
     public int big;//BB
@@ -47,6 +47,52 @@ public class Table implements TableActions {
             bets.add(-1);
             status.add(false);
         }
+    }
+
+    public void fold(Integer place) {
+        status.remove(place - 1);
+        status.add(place - 1, false);
+    }
+
+    public boolean checkEndGame() {
+        int tmp = 0;
+        for (int i = 0; i < 6; i++) {
+            if (this.status.get(i).equals(true)) {
+                tmp++;
+            }
+        }
+        return tmp == 1;
+    }
+
+    public boolean nextTurn() {
+        while (true) {
+            this.turn = (this.turn + 1) % 7 + (this.turn + 1) / 7;
+            if(this.status.get(this.turn-1).equals(true)){
+                return this.turn == this.actionPosition;
+            }
+        }
+    }
+
+    public void endGame() {
+        for (int i = 0; i < 6; i++) {
+            if (this.status.get(i).equals(true)) {
+                int bets = 0;
+                for (int j = 0; j < 6; j++) {
+                    if (!this.seats.get(j).equals("0")) {
+                        bets += this.bets.get(j);
+                        this.bets.remove(j);
+                        this.bets.add(j, 0);
+                        this.status.remove(j);
+                        this.status.add(j, true);
+                    }
+                }
+                bets += this.cash.get(i);
+                this.cash.remove(i);
+                this.cash.add(i, bets + this.pot);
+                break;
+            }
+        }
+        this.pot = 0;
     }
 
     @Override
@@ -77,9 +123,12 @@ public class Table implements TableActions {
                     tmp++;
                 }
             }
-            if (tmp > 1) {
+            if (tmp == 2) {
                 this.isGameRunning = true;
+                return true;
             }
+        } else {
+            return false;
         }
 
         return this.isGameRunning;
@@ -93,47 +142,48 @@ public class Table implements TableActions {
         while (tmp == 0) {
             blind = (blind + 1) % 7 + (blind + 1) / 7;
             if (!this.seats.get(blind - 1).equals("0")) {
-                int bet = this.bets.get(blind-1);
-                int cash = this.cash.get(blind-1);
+                int bet = this.bets.get(blind - 1);
+                int cash = this.cash.get(blind - 1);
                 this.bets.remove(blind - 1);
-                this.bets.add(blind -1,bet + this.small);
+                this.bets.add(blind - 1, bet + this.small);
                 this.cash.remove(blind - 1);
-                this.cash.add(blind -1,cash - this.small);
+                this.cash.add(blind - 1, cash - this.small);
                 tmp++;
             }
         }
         while (tmp == 1) {
             blind = (blind + 1) % 7 + (blind + 1) / 7;
             if (!this.seats.get(blind - 1).equals("0")) {
-                int bet = this.bets.get(blind-1);
-                int cash = this.cash.get(blind-1);
+                int bet = this.bets.get(blind - 1);
+                int cash = this.cash.get(blind - 1);
                 this.bets.remove(blind - 1);
-                this.bets.add(blind -1,bet + this.big);
+                this.bets.add(blind - 1, bet + this.big);
                 this.cash.remove(blind - 1);
-                this.cash.add(blind -1,cash - this.big);
+                this.cash.add(blind - 1, cash - this.big);
                 tmp++;
             }
         }
-        
+
         while (tmp == 2) {
             blind = (blind + 1) % 7 + (blind + 1) / 7;
             if (this.status.get(blind - 1).equals(true)) {
                 this.turn = blind;
+                this.actionPosition = blind;
                 tmp++;
             }
-        }       
+        }
     }
 
     @Override
     public String startNewGame() {
-        for(int i=0;i<6;i++){
-            if(!this.seats.get(i).equals("0")){
+
+        for (int i = 0; i < 6; i++) {
+            if (!this.seats.get(i).equals("0")) {
                 this.status.remove(i);
-                this.status.add(i,true);
+                this.status.add(i, true);
             }
         }
-        
-        
+
         if (this.buttonPosition == 0) {
             for (int i = 0; i < this.seats.size(); i++) {
                 if (!this.seats.get(i).equals("0")) {
@@ -144,8 +194,9 @@ public class Table implements TableActions {
         } else {
             do {
                 buttonPosition = (buttonPosition + 1) % 7 + (buttonPosition + 1) / 7;
-            } while (!this.seats.get(this.buttonPosition - 1).equals("0"));
+            } while (this.seats.get(this.buttonPosition - 1).equals("0"));
         }
+
         this.deal = new Deal(seats);
         deal.newDeal();
         StringBuilder stringBuilder = new StringBuilder();

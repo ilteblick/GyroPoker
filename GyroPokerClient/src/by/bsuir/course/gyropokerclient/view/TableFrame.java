@@ -341,6 +341,11 @@ public class TableFrame extends javax.swing.JFrame {
         card5.setText("jLabel1");
 
         foldBtn.setText("FOLD");
+        foldBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foldBtnActionPerformed(evt);
+            }
+        });
 
         callBtn.setText("check/call");
 
@@ -652,6 +657,16 @@ public class TableFrame extends javax.swing.JFrame {
         place = 0;
         con.getSender().SendToServer(stringBuilder.toString());
     }//GEN-LAST:event_standUpBtnActionPerformed
+
+    private void foldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foldBtnActionPerformed
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Fold")
+                .append(":")
+                .append(this.name)
+                .append(":")
+                .append(Integer.toString(this.place));
+        con.getSender().SendToServer(stringBuilder.toString());
+    }//GEN-LAST:event_foldBtnActionPerformed
 
     /**
      * @param args the command line arguments

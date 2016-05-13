@@ -38,6 +38,10 @@ public class MessageController {
                 return th.standUP(packet.getInfo().get(0),
                         Integer.parseInt(packet.getInfo().get(1)));
             }
+            case "Fold":{
+                return th.fold(packet.getInfo().get(0),
+                        Integer.parseInt(packet.getInfo().get(1)));
+            }
             default:return null;
         }
     }

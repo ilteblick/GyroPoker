@@ -348,8 +348,18 @@ public class TableFrame extends javax.swing.JFrame {
         });
 
         callBtn.setText("check/call");
+        callBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                callBtnActionPerformed(evt);
+            }
+        });
 
         raiseBtn.setText("Raise");
+        raiseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                raiseBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -667,6 +677,28 @@ public class TableFrame extends javax.swing.JFrame {
                 .append(Integer.toString(this.place));
         con.getSender().SendToServer(stringBuilder.toString());
     }//GEN-LAST:event_foldBtnActionPerformed
+
+    private void callBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_callBtnActionPerformed
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Call")
+                .append(":")
+                .append(this.name)
+                .append(":")
+                .append(Integer.toString(this.place));
+        con.getSender().SendToServer(stringBuilder.toString());
+    }//GEN-LAST:event_callBtnActionPerformed
+
+    private void raiseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raiseBtnActionPerformed
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Raise")
+                .append(":")
+                .append(this.name)
+                .append(":")
+                .append(Integer.toString(this.place))
+                .append(":")
+                .append(this.raiseField.getText());
+        con.getSender().SendToServer(stringBuilder.toString());
+    }//GEN-LAST:event_raiseBtnActionPerformed
 
     /**
      * @param args the command line arguments

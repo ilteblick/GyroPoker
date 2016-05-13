@@ -52,6 +52,39 @@ public class TableHandler {
         return null;
     }
     
+    public ArrayList<String> call(String name, Integer place){
+        ArrayList<String> list = new ArrayList<>();
+        for (Table table : TableList.tables) {
+            if (table.name.equals(name)) {
+                table.call(place);
+                boolean result = table.nextTurn();
+                if(result){
+                    list.add("Change:success:" + table.toString());////looooooooooooool
+                }else{
+                    list.add("Change:success:" + table.toString());
+                }
+                return list;
+            }
+        }
+        return null;
+    }
+    
+    
+    public ArrayList<String> raise(String name, Integer place, Integer raise){
+        ArrayList<String> list = new ArrayList<>();
+        for (Table table : TableList.tables) {
+            if (table.name.equals(name)) {
+                table.raise(place, raise);
+                boolean result = table.nextTurn();
+                list.add("Change:success:" + table.toString());
+                    
+                
+                return list;
+            }
+        }
+        return null;
+    }
+    
     
     public ArrayList<String> seatToTable(String name, String nick, Integer place, Integer amount) {
         ArrayList<String> list = new ArrayList<>();

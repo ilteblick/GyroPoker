@@ -8,6 +8,7 @@ package by.bsuir.course.gyropokerserver.Entity;
 import by.bsuir.course.gyropokerserver.gameplay.Deal;
 import by.bsuir.course.gyropokerserver.gameplay.Hand;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -52,6 +53,29 @@ public class Table implements TableActions {
     public void fold(Integer place) {
         status.remove(place - 1);
         status.add(place - 1, false);
+    }
+    
+    public void raise(Integer place,Integer raise) {
+        this.actionPosition = place;
+        
+        Integer cash = this.cash.get(place-1) - raise + this.bets.get(place-1);
+        
+        this.bets.remove(place - 1);
+        this.bets.add(place - 1, raise);
+        
+        this.cash.remove(place - 1);
+        this.cash.add(place - 1, cash);
+    }
+    
+    public void call(Integer place){
+        Integer bets = Collections.max(this.bets);
+        Integer toCall = bets - this.bets.get(place-1);
+        Integer cash = this.cash.get(place-1) - toCall;
+        
+        this.cash.remove(place - 1);
+        this.cash.add(place - 1, cash);
+        this.bets.remove(place - 1);
+        this.bets.add(place - 1, bets);
     }
 
     public boolean checkEndGame() {
@@ -160,6 +184,7 @@ public class Table implements TableActions {
                 this.bets.add(blind - 1, bet + this.big);
                 this.cash.remove(blind - 1);
                 this.cash.add(blind - 1, cash - this.big);
+                this.actionPosition = blind;
                 tmp++;
             }
         }
@@ -167,8 +192,7 @@ public class Table implements TableActions {
         while (tmp == 2) {
             blind = (blind + 1) % 7 + (blind + 1) / 7;
             if (this.status.get(blind - 1).equals(true)) {
-                this.turn = blind;
-                this.actionPosition = blind;
+                this.turn = blind;               
                 tmp++;
             }
         }

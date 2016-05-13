@@ -42,6 +42,15 @@ public class MessageController {
                 return th.fold(packet.getInfo().get(0),
                         Integer.parseInt(packet.getInfo().get(1)));
             }
+            case "Call":{
+                return th.call(packet.getInfo().get(0),
+                        Integer.parseInt(packet.getInfo().get(1)));
+            }
+            case "Raise":{
+                return th.raise(packet.getInfo().get(0),
+                        Integer.parseInt(packet.getInfo().get(1)),
+                        Integer.parseInt(packet.getInfo().get(2)));
+            }
             default:return null;
         }
     }

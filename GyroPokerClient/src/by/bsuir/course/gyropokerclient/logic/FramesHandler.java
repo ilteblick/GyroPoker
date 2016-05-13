@@ -115,4 +115,26 @@ public class FramesHandler {
         }
     }
     
+    
+    public void showFlop(ArrayList<String> info){
+        for(TableFrame table : this.tables){
+            if(table.getTableName().equals(info.get(4))){
+                table.drawFlop(info);
+            }
+        }
+    }
+    public void showTurn(ArrayList<String> info){
+        for(TableFrame table : this.tables){
+            if(table.getTableName().equals(info.get(2))){
+                table.drawTurn(info);
+            }
+        }
+    }
+    public void showRiver(ArrayList<String> info){
+        for(TableFrame table : this.tables){
+            if(table.getTableName().equals(info.get(2))){
+                table.drawRiver(info);
+            }
+        }
+    }
 }

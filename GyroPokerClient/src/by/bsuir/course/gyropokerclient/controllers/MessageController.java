@@ -40,6 +40,15 @@ public class MessageController {
                 if("newGame".equals(packet.getInfo().get(0))){
                     ConnectionHandler.getInstance().startNewGame(packet);
                 }
+                if("Flop".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().flop(packet);
+                }
+                if("Turn".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().turn(packet);
+                }
+                if("River".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().river(packet);
+                }
                 break;
             }
         }

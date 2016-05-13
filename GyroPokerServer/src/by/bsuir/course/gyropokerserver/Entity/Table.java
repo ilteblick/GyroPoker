@@ -21,6 +21,7 @@ public class Table implements TableActions {
     private int buttonPosition = 0;
     private int turn = 0;
     private int actionPosition;
+    private int gamePhase;//0pre 1flop 2turn 3river
 
     public String name;//table name
     public int small;// SB
@@ -49,29 +50,58 @@ public class Table implements TableActions {
             status.add(false);
         }
     }
+    //true-showdown false- next phase
+    public String changePhase() {
+        int tmp = 0;
+        this.turn = this.buttonPosition;
+        while (tmp < 2) {
+            this.turn = (this.turn - 1) % 7 + (this.turn - 1) / 7;
+            if(this.turn == 0){
+                this.turn=6;
+            }
+            if (this.status.get(this.turn - 1).equals(true)) {
+                tmp++;
+            }
+        }
+
+        this.actionPosition = this.turn;
+
+        for (int i = 0; i < 6; i++) {
+            if (this.status.get(i).equals(true)) {
+                this.pot += this.bets.get(i);
+                this.bets.remove(i);
+                this.bets.add(i, 0);
+            }
+        }
+        
+        String response = this.deal.next(this.gamePhase);
+        this.gamePhase++;
+        
+        return response;
+    }
 
     public void fold(Integer place) {
         status.remove(place - 1);
         status.add(place - 1, false);
     }
-    
-    public void raise(Integer place,Integer raise) {
+
+    public void raise(Integer place, Integer raise) {
         this.actionPosition = place;
-        
-        Integer cash = this.cash.get(place-1) - raise + this.bets.get(place-1);
-        
+
+        Integer cash = this.cash.get(place - 1) - raise + this.bets.get(place - 1);
+
         this.bets.remove(place - 1);
         this.bets.add(place - 1, raise);
-        
+
         this.cash.remove(place - 1);
         this.cash.add(place - 1, cash);
     }
-    
-    public void call(Integer place){
+
+    public void call(Integer place) {
         Integer bets = Collections.max(this.bets);
-        Integer toCall = bets - this.bets.get(place-1);
-        Integer cash = this.cash.get(place-1) - toCall;
-        
+        Integer toCall = bets - this.bets.get(place - 1);
+        Integer cash = this.cash.get(place - 1) - toCall;
+
         this.cash.remove(place - 1);
         this.cash.add(place - 1, cash);
         this.bets.remove(place - 1);
@@ -91,7 +121,7 @@ public class Table implements TableActions {
     public boolean nextTurn() {
         while (true) {
             this.turn = (this.turn + 1) % 7 + (this.turn + 1) / 7;
-            if(this.status.get(this.turn-1).equals(true)){
+            if (this.status.get(this.turn - 1).equals(true)) {
                 return this.turn == this.actionPosition;
             }
         }
@@ -192,7 +222,7 @@ public class Table implements TableActions {
         while (tmp == 2) {
             blind = (blind + 1) % 7 + (blind + 1) / 7;
             if (this.status.get(blind - 1).equals(true)) {
-                this.turn = blind;               
+                this.turn = blind;
                 tmp++;
             }
         }
@@ -200,6 +230,7 @@ public class Table implements TableActions {
 
     @Override
     public String startNewGame() {
+        this.gamePhase = 0;
 
         for (int i = 0; i < 6; i++) {
             if (!this.seats.get(i).equals("0")) {

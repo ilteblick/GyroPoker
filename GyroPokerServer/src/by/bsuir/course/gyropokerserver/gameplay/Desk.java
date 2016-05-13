@@ -12,5 +12,5 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class Desk {
-    public ArrayList<Card> deskCards;
+    public ArrayList<Card> deskCards = new ArrayList<>();
 }

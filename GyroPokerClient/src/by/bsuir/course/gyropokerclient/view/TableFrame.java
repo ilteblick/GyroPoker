@@ -82,15 +82,17 @@ public class TableFrame extends javax.swing.JFrame {
     }
     
     public void drawFlop(ArrayList<String> info){
-        
+        this.card1.setText(info.get(1));
+        this.card2.setText(info.get(2));
+        this.card3.setText(info.get(3));
     }
     
     public void drawTurn(ArrayList<String> info){
-        
+        this.card4.setText(info.get(1));
     }
     
     public void drawRiver(ArrayList<String> info){
-        
+        this.card5.setText(info.get(1));
     }
     
     
@@ -156,6 +158,7 @@ public class TableFrame extends javax.swing.JFrame {
         }
         this.initPlayers(info);
         this.showActions(Integer.parseInt(info.get(28)));
+        this.pot.setText(info.get(27));
     }
 
     private void initPlayers(ArrayList<String> info) {
@@ -237,6 +240,7 @@ public class TableFrame extends javax.swing.JFrame {
         callBtn = new javax.swing.JButton();
         raiseBtn = new javax.swing.JButton();
         raiseField = new javax.swing.JTextField();
+        pot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -360,6 +364,8 @@ public class TableFrame extends javax.swing.JFrame {
                 raiseBtnActionPerformed(evt);
             }
         });
+
+        pot.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -485,14 +491,19 @@ public class TableFrame extends javax.swing.JFrame {
                             .addComponent(Player2Seat)))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(foldBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(callBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(raiseField)
-                    .addComponent(raiseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(148, 148, 148))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(foldBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(callBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(raiseField)
+                            .addComponent(raiseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(148, 148, 148))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pot)
+                        .addGap(349, 349, 349))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -551,7 +562,10 @@ public class TableFrame extends javax.swing.JFrame {
                                     .addComponent(card2)
                                     .addComponent(card3)
                                     .addComponent(card4)
-                                    .addComponent(card5)))
+                                    .addComponent(card5))
+                                .addGap(34, 34, 34)
+                                .addComponent(pot)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Player6Bets)
                                 .addGap(17, 17, 17)
@@ -776,6 +790,7 @@ public class TableFrame extends javax.swing.JFrame {
     private javax.swing.JLabel card4;
     private javax.swing.JLabel card5;
     private javax.swing.JButton foldBtn;
+    private javax.swing.JLabel pot;
     private javax.swing.JButton raiseBtn;
     private javax.swing.JTextField raiseField;
     private javax.swing.JButton standUpBtn;

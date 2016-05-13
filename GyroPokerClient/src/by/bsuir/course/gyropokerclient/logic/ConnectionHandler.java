@@ -66,5 +66,14 @@ public class ConnectionHandler {
         FramesHandler.getInstance().gettingCards(packet.getInfo());
     }
     
+    public void flop(Packet packet){
+        FramesHandler.getInstance().showFlop(packet.getInfo());
+    }
+    public void turn(Packet packet){
+        FramesHandler.getInstance().showTurn(packet.getInfo());
+    }
+    public void river(Packet packet){
+        FramesHandler.getInstance().showRiver(packet.getInfo());
+    }
     
 }

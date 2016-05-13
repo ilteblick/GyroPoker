@@ -41,6 +41,9 @@ public class TableHandler {
                 }else{
                     boolean result = table.nextTurn();
                     if(result){
+                        list.add("Change:success:" + table.toString());
+                        list.add("Change:"+table.changePhase() +":" + table.name );
+                        list.add("Change:success:" + table.toString());
                         
                     }else{
                         list.add("Change:success:" + table.toString());
@@ -59,7 +62,9 @@ public class TableHandler {
                 table.call(place);
                 boolean result = table.nextTurn();
                 if(result){
-                    list.add("Change:success:" + table.toString());////looooooooooooool
+                    list.add("Change:success:" + table.toString());
+                    list.add("Change:"+table.changePhase() +":" + table.name );
+                    list.add("Change:success:" + table.toString());
                 }else{
                     list.add("Change:success:" + table.toString());
                 }
@@ -76,9 +81,7 @@ public class TableHandler {
             if (table.name.equals(name)) {
                 table.raise(place, raise);
                 boolean result = table.nextTurn();
-                list.add("Change:success:" + table.toString());
-                    
-                
+                list.add("Change:success:" + table.toString());               
                 return list;
             }
         }

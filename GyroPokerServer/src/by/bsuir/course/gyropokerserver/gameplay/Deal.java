@@ -23,7 +23,8 @@ public class Deal {
         this.seats = seats;
     }
     
-    public void newDeal(){        
+    public void newDeal(){
+        this.desk = new Desk();
         this.cardValues = new CardValues();
         for(String seat: seats){
             if(seat.equals("0")){
@@ -39,6 +40,62 @@ public class Deal {
                 Hand hand = new Hand(firstCard,secondCard);
                 hands.add(hand);
             }
+        }
+    }
+    
+    public String next(Integer phase){
+        StringBuilder stringBuilder = new StringBuilder();
+        switch(phase){
+            case 0:{
+                stringBuilder.append("Flop").append(":");
+                
+                int number = rnd.nextInt(cardValues.values.size()-1);
+                Card card = new Card(cardValues.values.get(number));
+                cardValues.values.remove(number);
+                desk.deskCards.add(card);
+                
+                stringBuilder.append(card.card).append(":");
+                
+                number = rnd.nextInt(cardValues.values.size()-1);
+                card = new Card(cardValues.values.get(number));
+                cardValues.values.remove(number);
+                desk.deskCards.add(card);
+                
+                stringBuilder.append(card.card).append(":");
+                
+                number = rnd.nextInt(cardValues.values.size()-1);
+                card = new Card(cardValues.values.get(number));
+                cardValues.values.remove(number);
+                desk.deskCards.add(card);
+                
+                stringBuilder.append(card.card).append(":");
+                return stringBuilder.toString();
+            }
+            case 1:{
+                stringBuilder.append("Turn").append(":");
+                int number = rnd.nextInt(cardValues.values.size()-1);
+                Card card = new Card(cardValues.values.get(number));
+                cardValues.values.remove(number);
+                desk.deskCards.add(card);
+                
+                stringBuilder.append(card.card).append(":");
+                return stringBuilder.toString();
+            }
+            case 2:{
+                
+                stringBuilder.append("River").append(":");
+                int number = rnd.nextInt(cardValues.values.size()-1);
+                Card card = new Card(cardValues.values.get(number));
+                cardValues.values.remove(number);
+                desk.deskCards.add(card);
+                
+                stringBuilder.append(card.card).append(":");
+                return stringBuilder.toString();
+            }
+            case 3:{
+                return stringBuilder.toString();
+            }
+            default:return"";
         }
     }
 }

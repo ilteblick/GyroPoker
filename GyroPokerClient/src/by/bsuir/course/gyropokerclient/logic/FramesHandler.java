@@ -107,5 +107,12 @@ public class FramesHandler {
         }
     }
     
+    public void gettingCards(ArrayList<String> info){
+        for(TableFrame table : this.tables){
+            if(table.getTableName().equals(info.get(1))){
+                table.drawPreFlop(info);
+            }
+        }
+    }
     
 }

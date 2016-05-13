@@ -62,5 +62,9 @@ public class ConnectionHandler {
         FramesHandler.getInstance().redrawTable(packet.getInfo());
     }
     
+    public void startNewGame(Packet packet){
+        FramesHandler.getInstance().gettingCards(packet.getInfo());
+    }
+    
     
 }

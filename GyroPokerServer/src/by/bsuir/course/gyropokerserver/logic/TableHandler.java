@@ -7,38 +7,51 @@ package by.bsuir.course.gyropokerserver.logic;
 
 import by.bsuir.course.gyropokerserver.Entity.Table;
 import by.bsuir.course.gyropokerserver.Entity.TableList;
+import java.util.ArrayList;
 
 /**
  *
  * @author Admin
  */
 public class TableHandler {
-    public String getTableInfo(String name){
-        for(Table table: TableList.tables){
-            if(table.name.equals(name)){
-                return("TableInfo:success:"+table.toString());
+
+    public ArrayList<String> getTableInfo(String name) {
+        ArrayList<String> list = new ArrayList<>();
+        for (Table table : TableList.tables) {
+            if (table.name.equals(name)) {                
+                list.add("TableInfo:success:" + table.toString());
+                return list;
             }
         }
-        return "";
+        return null;
     }
-    
-    public String seatToTable(String name, String nick, Integer place, Integer amount ){
-        for(Table table: TableList.tables){
-            if(table.name.equals(name)){
-                table.Seat(nick, place, amount);
-                return("Change:success:"+table.toString()); 
+
+    public ArrayList<String> seatToTable(String name, String nick, Integer place, Integer amount) {
+        ArrayList<String> list = new ArrayList<>();
+        for (Table table : TableList.tables) {
+            if (table.name.equals(name)) {
+                boolean result = table.Seat(nick, place, amount);               
+                list.add("Change:success:" + table.toString());
+                if(result){
+                    list.add("Change:newGame:"+ table.name +":" + table.startNewGame());
+                    table.betBlinds();
+                    list.add("Change:success:" + table.toString());
+                }
+                return list;
             }
         }
-        return "";
+        return null;
     }
-    
-    public String standUP(String name, Integer place){
-        for(Table table: TableList.tables){
-            if(table.name.equals(name)){
+
+    public ArrayList<String> standUP(String name, Integer place) {
+        ArrayList<String> list = new ArrayList<>();
+        for (Table table : TableList.tables) {
+            if (table.name.equals(name)) {
                 table.standUp(place);
-                return("Change:success:"+table.toString()); 
+                list.add("Change:success:" + table.toString());
+                return list;
             }
         }
-        return "";
+        return null;
     }
 }

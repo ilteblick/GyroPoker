@@ -8,6 +8,7 @@ package by.bsuir.course.gyropokerserver.controllers;
 import by.bsuir.course.gyropokerserver.Entity.Packet;
 import by.bsuir.course.gyropokerserver.logic.RoomHandler;
 import by.bsuir.course.gyropokerserver.logic.TableHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,7 @@ public class MessageController {
     RoomHandler rh = new RoomHandler();
     TableHandler th = new TableHandler();
     
-    public String execute(Packet packet){
+    public ArrayList<String> execute(Packet packet){
         switch(packet.getHeader()){
             case "Login":{
                 return rh.checkLoginInfo(packet);
@@ -37,7 +38,7 @@ public class MessageController {
                 return th.standUP(packet.getInfo().get(0),
                         Integer.parseInt(packet.getInfo().get(1)));
             }
-            default:return"";
+            default:return null;
         }
     }
 }

@@ -9,6 +9,7 @@ import by.bsuir.course.gyropokerserver.DAO.GyroPokerDaoImpl;
 import by.bsuir.course.gyropokerserver.Entity.Packet;
 import by.bsuir.course.gyropokerserver.Entity.Player;
 import by.bsuir.course.gyropokerserver.Entity.TableList;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,19 +22,21 @@ public class RoomHandler {
     }
     
     
-    public String checkLoginInfo(Packet packet){
+    public ArrayList<String> checkLoginInfo(Packet packet){
+        ArrayList<String> list = new ArrayList<>();
         String name = packet.getInfo().get(0);
         String password = packet.getInfo().get(1);
         boolean result = GyroPokerDaoImpl.getInstance().checkLogin(name, password);
         StringBuilder sb = new StringBuilder();
         if(result){
             Player player = GyroPokerDaoImpl.getInstance().getPlayerById(name);
-            return ("LoginResponse:Success:" + player.nick + ":" + player.name +
+            list.add("LoginResponse:Success:" + player.nick + ":" + player.name +
                     ":" + player.surename + ":" + player.address + ":" + 
                     player.phone + ":" + player.email + ":" + Double.toString(player.balance) +
                     ":" + Double.toString(player.playMoney) + ":" + TableList.info());
         }else{
-            return "LoginResponse:Failed";
+            list.add("LoginResponse:Failed");
         }
+        return list;
     }
 }

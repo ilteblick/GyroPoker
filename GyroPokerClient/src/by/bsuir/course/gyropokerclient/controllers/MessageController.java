@@ -37,6 +37,9 @@ public class MessageController {
                 if("success".equals(packet.getInfo().get(0))){
                     ConnectionHandler.getInstance().makeChanges(packet);
                 }
+                if("newGame".equals(packet.getInfo().get(0))){
+                    ConnectionHandler.getInstance().startNewGame(packet);
+                }
                 break;
             }
         }

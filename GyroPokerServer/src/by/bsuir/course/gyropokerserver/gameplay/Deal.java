@@ -92,9 +92,6 @@ public class Deal {
                 stringBuilder.append(card.card).append(":");
                 return stringBuilder.toString();
             }
-            case 3:{
-                return stringBuilder.toString();
-            }
             default:return"";
         }
     }

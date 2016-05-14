@@ -67,6 +67,12 @@ public class TableFrame extends javax.swing.JFrame {
     }
 
     public void drawPreFlop(ArrayList<String> info){
+        this.card1.setText("");
+        this.card2.setText("");
+        this.card3.setText("");
+        this.card4.setText("");
+        this.card5.setText("");
+        
         this.initPlayerCards(1, info.get(2), info.get(3),
                 this.Player1Card1, this.Player1Card2);
         this.initPlayerCards(2, info.get(4), info.get(5),

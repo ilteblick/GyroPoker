@@ -5,6 +5,7 @@
  */
 package by.bsuir.course.gyropokerserver.Entity;
 
+import by.bsuir.course.gyropokerserver.combination.WinnerFinder;
 import by.bsuir.course.gyropokerserver.gameplay.Deal;
 import by.bsuir.course.gyropokerserver.gameplay.Hand;
 import java.util.ArrayList;
@@ -73,9 +74,46 @@ public class Table implements TableActions {
                 this.bets.add(i, 0);
             }
         }
+        String response = "";
+        if(this.gamePhase != 3){
+            response = this.deal.next(this.gamePhase);
+            this.gamePhase++;
+        }else{
+            WinnerFinder winnerFinder = new WinnerFinder(this.deal);
+            int winner = winnerFinder.findWinner();
+            int bets = 0;
+            for (int j = 0; j < 6; j++) {
+                    if (!this.seats.get(j).equals("0")) {
+                        bets += this.bets.get(j);
+                        this.bets.remove(j);
+                        this.bets.add(j, 0);
+                    }
+                }
+            
+            bets = this.pot;
+            
+            if(winner > 10){
+                bets = bets /2;
+                int player = winner /10;
+                int goods = bets + this.cash.get(player);
+                
+                this.cash.remove(player);
+                this.cash.add(player, goods);
+                System.out.println("Draw " + player + " pot"+ goods);
+                player = winner % 10;
+                goods = bets + this.cash.get(player);
+                this.cash.remove(player);
+                this.cash.add(player, goods);
+                System.out.println("Draw " + player + " pot"+ goods);
+            }else{
+                bets += this.cash.get(winner);
+                this.cash.remove(winner);
+                this.cash.add(winner, bets);
+                System.out.println("Winner " + winner + " pot"+ bets);
+            }
+            response = "NEW";
+        }
         
-        String response = this.deal.next(this.gamePhase);
-        this.gamePhase++;
         
         return response;
     }
@@ -231,6 +269,7 @@ public class Table implements TableActions {
     @Override
     public String startNewGame() {
         this.gamePhase = 0;
+        this.pot = 0;
 
         for (int i = 0; i < 6; i++) {
             if (!this.seats.get(i).equals("0")) {

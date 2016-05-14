@@ -18,7 +18,7 @@ public class TableHandler {
     public ArrayList<String> getTableInfo(String name) {
         ArrayList<String> list = new ArrayList<>();
         for (Table table : TableList.tables) {
-            if (table.name.equals(name)) {                
+            if (table.name.equals(name)) {
                 list.add("TableInfo:success:" + table.toString());
                 return list;
             }
@@ -26,26 +26,33 @@ public class TableHandler {
         return null;
     }
 
-    public ArrayList<String> fold(String name, Integer place){
+    public ArrayList<String> fold(String name, Integer place) {
         ArrayList<String> list = new ArrayList<>();
         for (Table table : TableList.tables) {
             if (table.name.equals(name)) {
                 table.fold(place);
                 boolean end = table.checkEndGame();
-                if(end){
+                if (end) {
                     table.endGame();
                     list.add("Change:success:" + table.toString());
-                    list.add("Change:newGame:"+ table.name +":" + table.startNewGame());
+                    list.add("Change:newGame:" + table.name + ":" + table.startNewGame());
                     table.betBlinds();
                     list.add("Change:success:" + table.toString());
-                }else{
+                } else {
                     boolean result = table.nextTurn();
-                    if(result){
+                    if (result) {
                         list.add("Change:success:" + table.toString());
-                        list.add("Change:"+table.changePhase() +":" + table.name );
+                        String response = table.changePhase();
+                        if (response.equals("NEW")) {
+                            list.add("Change:newGame:" + table.name + ":" + table.startNewGame());
+                            table.betBlinds();
+                        } else {
+                            list.add("Change:" + response + ":" + table.name);
+                        }
+
                         list.add("Change:success:" + table.toString());
-                        
-                    }else{
+
+                    } else {
                         list.add("Change:success:" + table.toString());
                     }
                 }
@@ -54,18 +61,24 @@ public class TableHandler {
         }
         return null;
     }
-    
-    public ArrayList<String> call(String name, Integer place){
+
+    public ArrayList<String> call(String name, Integer place) {
         ArrayList<String> list = new ArrayList<>();
         for (Table table : TableList.tables) {
             if (table.name.equals(name)) {
                 table.call(place);
                 boolean result = table.nextTurn();
-                if(result){
+                if (result) {
                     list.add("Change:success:" + table.toString());
-                    list.add("Change:"+table.changePhase() +":" + table.name );
+                    String response = table.changePhase();
+                    if (response.equals("NEW")) {
+                        list.add("Change:newGame:" + table.name + ":" + table.startNewGame());
+                        table.betBlinds();
+                    } else {
+                        list.add("Change:" + response + ":" + table.name);
+                    }
                     list.add("Change:success:" + table.toString());
-                }else{
+                } else {
                     list.add("Change:success:" + table.toString());
                 }
                 return list;
@@ -73,30 +86,28 @@ public class TableHandler {
         }
         return null;
     }
-    
-    
-    public ArrayList<String> raise(String name, Integer place, Integer raise){
+
+    public ArrayList<String> raise(String name, Integer place, Integer raise) {
         ArrayList<String> list = new ArrayList<>();
         for (Table table : TableList.tables) {
             if (table.name.equals(name)) {
                 table.raise(place, raise);
                 boolean result = table.nextTurn();
-                list.add("Change:success:" + table.toString());               
+                list.add("Change:success:" + table.toString());
                 return list;
             }
         }
         return null;
     }
-    
-    
+
     public ArrayList<String> seatToTable(String name, String nick, Integer place, Integer amount) {
         ArrayList<String> list = new ArrayList<>();
         for (Table table : TableList.tables) {
             if (table.name.equals(name)) {
-                boolean result = table.Seat(nick, place, amount);               
+                boolean result = table.Seat(nick, place, amount);
                 list.add("Change:success:" + table.toString());
-                if(result){
-                    list.add("Change:newGame:"+ table.name +":" + table.startNewGame());
+                if (result) {
+                    list.add("Change:newGame:" + table.name + ":" + table.startNewGame());
                     table.betBlinds();
                     list.add("Change:success:" + table.toString());
                 }

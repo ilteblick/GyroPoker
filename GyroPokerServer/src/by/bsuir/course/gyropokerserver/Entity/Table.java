@@ -68,7 +68,7 @@ public class Table implements TableActions {
         this.actionPosition = this.turn;
 
         for (int i = 0; i < 6; i++) {
-            if (this.status.get(i).equals(true)) {
+            if (!this.seats.get(i).equals("0")) {
                 this.pot += this.bets.get(i);
                 this.bets.remove(i);
                 this.bets.add(i, 0);

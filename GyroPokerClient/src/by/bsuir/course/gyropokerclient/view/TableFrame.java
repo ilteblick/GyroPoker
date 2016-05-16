@@ -7,7 +7,10 @@ package by.bsuir.course.gyropokerclient.view;
 
 import by.bsuir.course.gyropokerclient.connection.Connection;
 import by.bsuir.course.gyropokerclient.logic.FramesHandler;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -47,10 +50,33 @@ public class TableFrame extends javax.swing.JFrame {
         initComponents();
         this.initPlayers(info);
         this.standUpBtn.setVisible(false);
+        this.initLbls();
+    }
+    
+    private void initLbls(){
+        this.Player1Card1.setLocation(460, 50);
+        this.Player1Card2.setLocation(500, 50);
+        
+        this.Player2Card1.setLocation(560, 240);
+        this.Player2Card2.setLocation(600, 240);
+        
+        this.Player3Card1.setLocation(470, 380);
+        this.Player3Card2.setLocation(510, 380);
+        
+        this.Player4Card1.setLocation(300, 400);
+        this.Player4Card2.setLocation(340, 400);
+        
+        this.Player5Card1.setLocation(60, 260);
+        this.Player5Card2.setLocation(100, 260);
+        
+        this.Player6Card1.setLocation(170, 20);
+        this.Player6Card2.setLocation(210, 20);
     }
     
     private void initPlayerCards(int place, String firstCard, String secondCard,
             JLabel firstCardL, JLabel secondCardL){
+        firstCardL.setVisible(true);
+        secondCardL.setVisible(true);
         if(this.place == place){
             firstCardL.setText(firstCard);
             secondCardL.setText(secondCard);
@@ -156,6 +182,30 @@ public class TableFrame extends javax.swing.JFrame {
     }
 
     public void drawTable(ArrayList<String> info) {
+        if(info.get(6).equals("false")){
+            this.Player1Card1.setVisible(false);
+            this.Player1Card2.setVisible(false);
+        }
+        if(info.get(10).equals("false")){
+            this.Player2Card1.setVisible(false);
+            this.Player2Card2.setVisible(false);
+        }
+        if(info.get(14).equals("false")){
+            this.Player3Card1.setVisible(false);
+            this.Player3Card2.setVisible(false);
+        }
+        if(info.get(18).equals("false")){
+            this.Player4Card1.setVisible(false);
+            this.Player4Card2.setVisible(false);
+        }
+        if(info.get(22).equals("false")){
+            this.Player5Card1.setVisible(false);
+            this.Player5Card2.setVisible(false);
+        }
+        if(info.get(26).equals("false")){
+            this.Player6Card1.setVisible(false);
+            this.Player6Card2.setVisible(false);
+        }
         if (this.place == 0) {
             this.standUpBtn.setVisible(false);
             this.hideBtns();
@@ -165,6 +215,7 @@ public class TableFrame extends javax.swing.JFrame {
         this.initPlayers(info);
         this.showActions(Integer.parseInt(info.get(28)));
         this.pot.setText(info.get(27));
+        
     }
 
     private void initPlayers(ArrayList<String> info) {
@@ -249,15 +300,30 @@ public class TableFrame extends javax.swing.JFrame {
         pot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1000, 600));
+        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(null);
 
+        Player1Nick.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Player1Nick.setForeground(new java.awt.Color(51, 0, 255));
         Player1Nick.setText("jLabel1");
+        Player1Nick.setOpaque(true);
+        getContentPane().add(Player1Nick);
+        Player1Nick.setBounds(590, 50, 45, 17);
 
+        Player1Cash.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Player1Cash.setForeground(new java.awt.Color(51, 153, 0));
         Player1Cash.setText("jLabel2");
+        Player1Cash.setOpaque(true);
+        getContentPane().add(Player1Cash);
+        Player1Cash.setBounds(590, 80, 40, 17);
 
         Player1Seat.setText("Seat");
         Player1Seat.addActionListener(new java.awt.event.ActionListener() {
@@ -265,14 +331,36 @@ public class TableFrame extends javax.swing.JFrame {
                 Player1SeatActionPerformed(evt);
             }
         });
+        getContentPane().add(Player1Seat);
+        Player1Seat.setBounds(580, 100, 90, 23);
 
+        Player1Bets.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        Player1Bets.setForeground(new java.awt.Color(255, 51, 51));
         Player1Bets.setText("jLabel1");
+        Player1Bets.setOpaque(true);
+        getContentPane().add(Player1Bets);
+        Player1Bets.setBounds(500, 120, 54, 22);
 
+        Player2Bets.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        Player2Bets.setForeground(new java.awt.Color(255, 51, 51));
         Player2Bets.setText("jLabel1");
+        Player2Bets.setOpaque(true);
+        getContentPane().add(Player2Bets);
+        Player2Bets.setBounds(550, 310, 54, 22);
 
+        Player2Nick.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Player2Nick.setForeground(new java.awt.Color(51, 0, 255));
         Player2Nick.setText("jLabel1");
+        Player2Nick.setOpaque(true);
+        getContentPane().add(Player2Nick);
+        Player2Nick.setBounds(660, 260, 45, 17);
 
+        Player2Cash.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Player2Cash.setForeground(new java.awt.Color(51, 153, 0));
         Player2Cash.setText("jLabel2");
+        Player2Cash.setOpaque(true);
+        getContentPane().add(Player2Cash);
+        Player2Cash.setBounds(660, 290, 40, 17);
 
         Player2Seat.setText("Seat");
         Player2Seat.addActionListener(new java.awt.event.ActionListener() {
@@ -280,12 +368,29 @@ public class TableFrame extends javax.swing.JFrame {
                 Player2SeatActionPerformed(evt);
             }
         });
+        getContentPane().add(Player2Seat);
+        Player2Seat.setBounds(650, 320, 100, 23);
 
+        Player3Bets.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        Player3Bets.setForeground(new java.awt.Color(255, 51, 51));
         Player3Bets.setText("jLabel1");
+        Player3Bets.setOpaque(true);
+        getContentPane().add(Player3Bets);
+        Player3Bets.setBounds(440, 350, 54, 22);
 
+        Player3Nick.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Player3Nick.setForeground(new java.awt.Color(51, 0, 255));
         Player3Nick.setText("jLabel1");
+        Player3Nick.setOpaque(true);
+        getContentPane().add(Player3Nick);
+        Player3Nick.setBounds(512, 433, 45, 17);
 
+        Player3Cash.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Player3Cash.setForeground(new java.awt.Color(51, 153, 0));
         Player3Cash.setText("jLabel2");
+        Player3Cash.setOpaque(true);
+        getContentPane().add(Player3Cash);
+        Player3Cash.setBounds(512, 450, 40, 17);
 
         Player3Seat.setText("Seat");
         Player3Seat.addActionListener(new java.awt.event.ActionListener() {
@@ -293,12 +398,29 @@ public class TableFrame extends javax.swing.JFrame {
                 Player3SeatActionPerformed(evt);
             }
         });
+        getContentPane().add(Player3Seat);
+        Player3Seat.setBounds(502, 473, 70, 23);
 
+        Player4Bets.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        Player4Bets.setForeground(new java.awt.Color(255, 51, 51));
         Player4Bets.setText("jLabel1");
+        Player4Bets.setOpaque(true);
+        getContentPane().add(Player4Bets);
+        Player4Bets.setBounds(290, 350, 54, 22);
 
+        Player4Nick.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Player4Nick.setForeground(new java.awt.Color(51, 0, 255));
         Player4Nick.setText("jLabel1");
+        Player4Nick.setOpaque(true);
+        getContentPane().add(Player4Nick);
+        Player4Nick.setBounds(300, 440, 45, 17);
 
+        Player4Cash.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Player4Cash.setForeground(new java.awt.Color(51, 153, 0));
         Player4Cash.setText("jLabel2");
+        Player4Cash.setOpaque(true);
+        getContentPane().add(Player4Cash);
+        Player4Cash.setBounds(300, 460, 40, 17);
 
         Player4Seat.setText("Seat");
         Player4Seat.addActionListener(new java.awt.event.ActionListener() {
@@ -306,12 +428,29 @@ public class TableFrame extends javax.swing.JFrame {
                 Player4SeatActionPerformed(evt);
             }
         });
+        getContentPane().add(Player4Seat);
+        Player4Seat.setBounds(290, 480, 100, 23);
 
+        Player5Bets.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        Player5Bets.setForeground(new java.awt.Color(255, 51, 51));
         Player5Bets.setText("jLabel1");
+        Player5Bets.setOpaque(true);
+        getContentPane().add(Player5Bets);
+        Player5Bets.setBounds(160, 300, 54, 22);
 
+        Player5Nick.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Player5Nick.setForeground(new java.awt.Color(51, 0, 255));
         Player5Nick.setText("jLabel1");
+        Player5Nick.setOpaque(true);
+        getContentPane().add(Player5Nick);
+        Player5Nick.setBounds(70, 310, 45, 17);
 
+        Player5Cash.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Player5Cash.setForeground(new java.awt.Color(51, 153, 0));
         Player5Cash.setText("jLabel2");
+        Player5Cash.setOpaque(true);
+        getContentPane().add(Player5Cash);
+        Player5Cash.setBounds(70, 330, 40, 17);
 
         Player5Seat.setText("Seat");
         Player5Seat.addActionListener(new java.awt.event.ActionListener() {
@@ -319,12 +458,29 @@ public class TableFrame extends javax.swing.JFrame {
                 Player5SeatActionPerformed(evt);
             }
         });
+        getContentPane().add(Player5Seat);
+        Player5Seat.setBounds(60, 350, 80, 23);
 
+        Player6Bets.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        Player6Bets.setForeground(new java.awt.Color(255, 51, 51));
         Player6Bets.setText("jLabel1");
+        Player6Bets.setOpaque(true);
+        getContentPane().add(Player6Bets);
+        Player6Bets.setBounds(170, 100, 54, 20);
 
+        Player6Nick.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        Player6Nick.setForeground(new java.awt.Color(51, 0, 255));
         Player6Nick.setText("jLabel1");
+        Player6Nick.setOpaque(true);
+        getContentPane().add(Player6Nick);
+        Player6Nick.setBounds(100, 20, 45, 20);
 
+        Player6Cash.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        Player6Cash.setForeground(new java.awt.Color(51, 153, 0));
         Player6Cash.setText("jLabel2");
+        Player6Cash.setOpaque(true);
+        getContentPane().add(Player6Cash);
+        Player6Cash.setBounds(100, 50, 40, 20);
 
         Player6Seat.setText("Seat");
         Player6Seat.addActionListener(new java.awt.event.ActionListener() {
@@ -332,6 +488,8 @@ public class TableFrame extends javax.swing.JFrame {
                 Player6SeatActionPerformed(evt);
             }
         });
+        getContentPane().add(Player6Seat);
+        Player6Seat.setBounds(90, 70, 70, 20);
 
         standUpBtn.setText("StandUp");
         standUpBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -339,297 +497,154 @@ public class TableFrame extends javax.swing.JFrame {
                 standUpBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(standUpBtn);
+        standUpBtn.setBounds(800, 10, 73, 23);
 
-        card1.setText("jLabel1");
+        card1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        card1.setForeground(new java.awt.Color(0, 0, 255));
+        card1.setText("ab");
+        card1.setOpaque(true);
+        getContentPane().add(card1);
+        card1.setBounds(220, 180, 50, 42);
 
-        card2.setText("jLabel1");
+        card2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        card2.setForeground(new java.awt.Color(0, 0, 255));
+        card2.setText("ab");
+        card2.setOpaque(true);
+        getContentPane().add(card2);
+        card2.setBounds(280, 180, 50, 42);
 
-        card3.setText("jLabel1");
+        card3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        card3.setForeground(new java.awt.Color(0, 0, 255));
+        card3.setText("ab");
+        card3.setOpaque(true);
+        getContentPane().add(card3);
+        card3.setBounds(340, 180, 50, 42);
 
-        card4.setText("jLabel1");
+        card4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        card4.setForeground(new java.awt.Color(0, 0, 255));
+        card4.setText("ab");
+        card4.setOpaque(true);
+        getContentPane().add(card4);
+        card4.setBounds(400, 180, 50, 42);
 
-        card5.setText("jLabel1");
+        card5.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        card5.setForeground(new java.awt.Color(0, 0, 255));
+        card5.setText("ab");
+        card5.setOpaque(true);
+        getContentPane().add(card5);
+        card5.setBounds(460, 180, 50, 42);
 
+        Player1Card1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player1Card1.setForeground(new java.awt.Color(0, 0, 255));
+        Player1Card1.setText("card");
+        getContentPane().add(Player1Card1);
+        Player1Card1.setBounds(460, 50, 40, 22);
+
+        Player1Card2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player1Card2.setForeground(new java.awt.Color(0, 0, 255));
+        Player1Card2.setText("card");
+        getContentPane().add(Player1Card2);
+        Player1Card2.setBounds(500, 50, 60, 22);
+
+        Player2Card1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player2Card1.setForeground(new java.awt.Color(0, 0, 255));
+        Player2Card1.setText("card");
+        getContentPane().add(Player2Card1);
+        Player2Card1.setBounds(500, 240, 40, 22);
+
+        Player2Card2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player2Card2.setForeground(new java.awt.Color(0, 0, 255));
+        Player2Card2.setText("card");
+        getContentPane().add(Player2Card2);
+        Player2Card2.setBounds(540, 240, 60, 22);
+
+        Player3Card1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player3Card1.setForeground(new java.awt.Color(0, 0, 255));
+        Player3Card1.setText("card");
+        getContentPane().add(Player3Card1);
+        Player3Card1.setBounds(470, 380, 40, 22);
+
+        Player3Card2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player3Card2.setForeground(new java.awt.Color(0, 0, 255));
+        Player3Card2.setText("card");
+        getContentPane().add(Player3Card2);
+        Player3Card2.setBounds(510, 380, 60, 22);
+
+        Player4Card1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player4Card1.setForeground(new java.awt.Color(0, 0, 255));
+        Player4Card1.setText("card");
+        getContentPane().add(Player4Card1);
+        Player4Card1.setBounds(300, 400, 40, 22);
+
+        Player4Card2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player4Card2.setForeground(new java.awt.Color(0, 0, 255));
+        Player4Card2.setText("card");
+        getContentPane().add(Player4Card2);
+        Player4Card2.setBounds(340, 400, 60, 22);
+
+        Player5Card1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player5Card1.setForeground(new java.awt.Color(0, 0, 255));
+        Player5Card1.setText("card");
+        getContentPane().add(Player5Card1);
+        Player5Card1.setBounds(60, 260, 40, 22);
+
+        Player5Card2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player5Card2.setForeground(new java.awt.Color(0, 0, 255));
+        Player5Card2.setText("card");
+        getContentPane().add(Player5Card2);
+        Player5Card2.setBounds(100, 260, 60, 22);
+
+        Player6Card1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player6Card1.setForeground(new java.awt.Color(0, 0, 255));
+        Player6Card1.setText("card");
+        getContentPane().add(Player6Card1);
+        Player6Card1.setBounds(170, 20, 40, 22);
+
+        Player6Card2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Player6Card2.setForeground(new java.awt.Color(0, 0, 255));
+        Player6Card2.setText("card");
+        getContentPane().add(Player6Card2);
+        Player6Card2.setBounds(210, 20, 60, 22);
+
+        foldBtn.setBackground(new java.awt.Color(255, 0, 0));
         foldBtn.setText("FOLD");
         foldBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 foldBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(foldBtn);
+        foldBtn.setBounds(619, 510, 70, 23);
 
+        callBtn.setBackground(new java.awt.Color(255, 0, 0));
         callBtn.setText("check/call");
         callBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 callBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(callBtn);
+        callBtn.setBounds(700, 510, 80, 23);
 
+        raiseBtn.setBackground(new java.awt.Color(255, 0, 0));
         raiseBtn.setText("Raise");
         raiseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 raiseBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(raiseBtn);
+        raiseBtn.setBounds(790, 510, 70, 23);
+
+        raiseField.setBackground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(raiseField);
+        raiseField.setBounds(790, 480, 70, 20);
 
         pot.setText("jLabel1");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Player5Bets)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Player5Cash)
-                                            .addComponent(Player5Nick))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Player5Card1)
-                                            .addComponent(Player5Card2)))))
-                            .addComponent(Player5Seat))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(standUpBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Player4Card1)
-                                    .addComponent(Player4Card2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Player3Card1)
-                                    .addComponent(Player3Card2))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(card1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(card2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(card3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(card4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(card5)
-                                        .addGap(70, 70, 70))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Player4Cash)
-                                                    .addComponent(Player4Nick)
-                                                    .addComponent(Player4Bets)))
-                                            .addComponent(Player4Seat))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Player3Cash)
-                                                    .addComponent(Player3Nick)
-                                                    .addComponent(Player3Bets)))
-                                            .addComponent(Player3Seat))
-                                        .addGap(12, 12, 12)))))
-                        .addGap(66, 66, 66))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Player6Cash)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Player1Card1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(Player6Nick)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Player6Card1)
-                                                    .addComponent(Player6Card2)))
-                                            .addComponent(Player6Bets)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(388, 388, 388)
-                                                .addComponent(Player1Bets)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(10, 10, 10)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(Player1Cash)
-                                                            .addComponent(Player1Nick)))
-                                                    .addComponent(Player1Seat))))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Player6Seat)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Player1Card2)
-                                .addGap(107, 107, 107)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Player2Card1)
-                            .addComponent(Player2Card2))
-                        .addGap(123, 123, 123))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Player2Bets)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Player2Cash)
-                                    .addComponent(Player2Nick)))
-                            .addComponent(Player2Seat)))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(foldBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(callBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(raiseField)
-                            .addComponent(raiseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(148, 148, 148))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pot)
-                        .addGap(349, 349, 349))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 186, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Player1Card1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Player1Card2)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(Player2Card1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(Player3Bets)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(Player2Nick)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(Player2Cash)
-                                                    .addComponent(Player2Bets))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(Player2Seat)))
-                                        .addGap(17, 17, 17)
-                                        .addComponent(Player3Nick)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(Player3Cash)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Player3Seat)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player2Card2)
-                                .addGap(108, 108, 108))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Player3Card1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player3Card2)
-                                .addGap(107, 107, 107))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Player6Card1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player6Card2)
-                                .addGap(286, 286, 286))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(standUpBtn)
-                                .addGap(123, 123, 123)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(card1)
-                                    .addComponent(card2)
-                                    .addComponent(card3)
-                                    .addComponent(card4)
-                                    .addComponent(card5))
-                                .addGap(34, 34, 34)
-                                .addComponent(pot)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Player6Bets)
-                                .addGap(17, 17, 17)
-                                .addComponent(Player6Nick)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Player1Nick)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Player1Cash)
-                                            .addComponent(Player1Bets))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Player1Seat))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Player6Cash)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Player6Seat)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Player5Bets)))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addComponent(Player5Nick)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Player5Cash))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Player5Card1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Player5Card2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player5Seat)
-                                .addGap(15, 15, 15)
-                                .addComponent(Player4Card1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player4Card2)
-                                .addGap(113, 113, 113))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player4Bets)
-                                .addGap(17, 17, 17)
-                                .addComponent(Player4Nick)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player4Cash)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Player4Seat)
-                                .addGap(29, 29, 29)
-                                .addComponent(raiseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(foldBtn)
-                                    .addComponent(callBtn)
-                                    .addComponent(raiseBtn))
-                                .addGap(36, 36, 36))))))
-        );
+        pot.setOpaque(true);
+        getContentPane().add(pot);
+        pot.setBounds(340, 250, 34, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

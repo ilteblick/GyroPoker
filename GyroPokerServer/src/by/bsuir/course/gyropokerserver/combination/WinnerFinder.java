@@ -5,11 +5,9 @@
  */
 package by.bsuir.course.gyropokerserver.combination;
 
-import by.bsuir.course.gyropokerserver.gameplay.Card;
 import by.bsuir.course.gyropokerserver.gameplay.Deal;
 import by.bsuir.course.gyropokerserver.gameplay.Hand;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**

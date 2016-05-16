@@ -74,6 +74,8 @@ public class Reciever extends Thread {
                     Logger.getLogger(Reciever.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Reciever.class.getName()).log(Level.SEVERE, null, ex);
+                    dis.close();
+                    socket.close();
                 }
             }
             dis.close();

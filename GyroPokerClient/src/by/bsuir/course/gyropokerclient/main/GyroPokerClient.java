@@ -6,7 +6,6 @@
 package by.bsuir.course.gyropokerclient.main;
 
 import by.bsuir.course.gyropokerclient.controllers.ConnectionController;
-import by.bsuir.course.gyropokerclient.logic.ConnectionHandler;
 import by.bsuir.course.gyropokerclient.logic.FramesHandler;
 import java.io.IOException;
 

@@ -26,7 +26,7 @@ public class Deal {
     public void newDeal(){
         this.desk = new Desk();
         this.cardValues = new CardValues();
-        for(String seat: seats){
+        seats.stream().forEach((seat) -> {
             if(seat.equals("0")){
                 Hand hand = new Hand();
                 hands.add(hand);
@@ -40,7 +40,7 @@ public class Deal {
                 Hand hand = new Hand(firstCard,secondCard);
                 hands.add(hand);
             }
-        }
+        });
     }
     
     public String next(Integer phase){
